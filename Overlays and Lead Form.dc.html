@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&amp;display=block">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#10183A;background:#E9E6DF;-webkit-font-smoothing:antialiased}
+a{color:#2A55A3}a:hover{color:#0A7F47}
+</style>
+</helmet>
+<div style="padding:64px;display:flex;flex-direction:column;gap:80px;width:max-content">
+
+<section style="display:flex;flex-direction:column;gap:24px">
+  <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:44px">Header overlays · desktop 1440</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;max-width:3000px">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">A · Study Abroad mega menu</span><div data-screen-label="Mega menu" style="width:1440px;height:700px;overflow:hidden;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15)"><dc-import name="Homepage Desktop" open-panel="study" show-toast="{{ f }}" hint-size="1440px,700px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">B · Exams mega menu</span><div style="width:1440px;height:560px;overflow:hidden;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15)"><dc-import name="Homepage Desktop" open-panel="exams" show-toast="{{ f }}" hint-size="1440px,560px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">C · Resources mega menu</span><div style="width:1440px;height:480px;overflow:hidden;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15)"><dc-import name="Homepage Desktop" open-panel="res" show-toast="{{ f }}" hint-size="1440px,480px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">D · Find a branch, grouped by state</span><div data-screen-label="Branch dropdown" style="width:1440px;height:620px;overflow:hidden;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15)"><dc-import name="Homepage Desktop" open-panel="branch" show-toast="{{ f }}" hint-size="1440px,620px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">E · Search with trending suggestions</span><div data-screen-label="Search" style="width:1440px;height:640px;overflow:hidden;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15)"><dc-import name="Homepage Desktop" open-panel="search" show-toast="{{ f }}" hint-size="1440px,640px"></dc-import></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:24px">
+  <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:44px">Header overlays · mobile 390</h2>
+  <div style="display:flex;gap:48px">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">F · Menu (accordion)</span><div style="width:390px;height:844px;overflow:hidden;border-radius:36px;border:8px solid #10183A;background:#FFFFFF"><dc-import name="Homepage Mobile" open-panel="menu" show-toast="{{ f }}" hint-size="390px,844px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">G · Search</span><div style="width:390px;height:844px;overflow:hidden;border-radius:36px;border:8px solid #10183A;background:#FFFFFF"><dc-import name="Homepage Mobile" open-panel="search" show-toast="{{ f }}" hint-size="390px,844px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">H · Find a branch</span><div style="width:390px;height:844px;overflow:hidden;border-radius:36px;border:8px solid #10183A;background:#FFFFFF"><dc-import name="Homepage Mobile" open-panel="branch" show-toast="{{ f }}" hint-size="390px,844px"></dc-import></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:24px">
+  <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:44px">Lead form · one component, three containers</h2>
+  <p style="margin:0;font-size:18px;color:#44506B;max-width:900px;line-height:1.5">Props: variant (inline / modal / sheet), heading, sub, cta, defaultCountry, counsellorRegion. Each page passes its own copy and default country or exam. All three are live: try Continue with empty fields.</p>
+  <div style="display:flex;gap:48px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">I · Inline (on a Canada page)</span><div style="width:460px;border-radius:28px;overflow:hidden;border:1px solid #DDE3EE;box-shadow:0 20px 50px rgba(0,0,0,.10)"><dc-import name="LeadForm" variant="inline" heading="Plan your Canada study permit with an expert" sub="Free 30-minute call. Get a list of DLIs that fit your profile." cta="Get my Canada shortlist" default-country="Canada" counsellor-region="Canada" hint-size="460px,600px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">J · Modal (from header CTA)</span><div style="width:760px;height:760px;border-radius:16px;background:repeating-linear-gradient(135deg,#C9CED9 0 10px,#D3D7E0 10px 20px);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden"><div style="position:absolute;inset:0;background:rgba(10,26,61,.6)"></div><div style="position:relative;width:480px;border-radius:28px;overflow:hidden;box-shadow:0 30px 70px rgba(10,26,61,.4)"><dc-import name="LeadForm" variant="modal" hint-size="480px,600px"></dc-import></div></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">K · Mobile bottom sheet (IELTS page)</span><div style="width:390px;height:844px;border-radius:36px;border:8px solid #10183A;overflow:hidden;position:relative;background:repeating-linear-gradient(135deg,#C9CED9 0 10px,#D3D7E0 10px 20px)"><div style="position:absolute;inset:0;background:rgba(10,26,61,.55)"></div><div style="position:absolute;left:0;right:0;bottom:0;border-radius:28px 28px 0 0;overflow:hidden"><dc-import name="LeadForm" variant="sheet" heading="Book a free IELTS demo class" sub="Get your current band estimate and a 6-week plan." cta="Book my demo class" counsellor-region="IELTS Trainer" hint-size="374px,600px"></dc-import></div></div></div>
+  </div>
+  <h3 style="margin:24px 0 0;font-family:Outfit,sans-serif;font-weight:700;font-size:28px">States</h3>
+  <div style="display:flex;gap:32px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">L · Step 1 validation error</span><div style="width:420px;border-radius:24px;overflow:hidden;border:1px solid #DDE3EE"><dc-import name="LeadForm" show-errors="{{ t }}" hint-size="420px,640px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">M · Step 2 chips</span><div style="width:420px;border-radius:24px;overflow:hidden;border:1px solid #DDE3EE"><dc-import name="LeadForm" initial-step="{{ two }}" hint-size="420px,720px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:600 15px ui-monospace,monospace">N · Success</span><div style="width:420px;border-radius:24px;overflow:hidden;border:1px solid #DDE3EE"><dc-import name="LeadForm" initial-step="{{ three }}" hint-size="420px,480px"></dc-import></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:24px">
+  <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:44px">Social-proof toast</h2>
+  <p style="margin:0;font-size:18px;color:#44506B;max-width:900px;line-height:1.5">Shown once per visit after 6 seconds (session storage), never over a form or menu, dismissible, announced politely to screen readers. Uses an aggregate count rather than invented names.</p>
+  <div style="display:flex;gap:32px;align-items:center">
+    <div role="status" style="width:360px;background:#FFFFFF;border-radius:18px;box-shadow:0 18px 40px rgba(14,35,80,.22);border:1px solid #DDE3EE;padding:14px 14px 14px 16px;display:flex;gap:12px;align-items:center"><span style="width:44px;height:44px;flex:none;border-radius:22px;background:#E2F4EA;color:#086B3C;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">groups</span></span><span style="flex:1;font-size:15px;line-height:1.4"><b>2.4L+ students</b> have studied abroad with Kanan</span><span style="width:44px;height:44px;flex:none;border-radius:22px;display:flex;align-items:center;justify-content:center;color:#44506B"><span class="material-symbols-rounded">close</span></span></div>
+    <div role="status" style="width:360px;background:#FFFFFF;border-radius:18px;box-shadow:0 18px 40px rgba(14,35,80,.22);border:1px solid #DDE3EE;padding:14px 14px 14px 16px;display:flex;gap:12px;align-items:center"><span style="width:44px;height:44px;flex:none;border-radius:22px;background:#FFF4CC;color:#7A5200;display:flex;align-items:center;justify-content:center;font:800 18px Outfit">G</span><span style="flex:1;font-size:15px;line-height:1.4"><b>600+ partner institutions</b> across 12 countries</span><span style="width:44px;height:44px;flex:none;border-radius:22px;display:flex;align-items:center;justify-content:center;color:#44506B"><span class="material-symbols-rounded">close</span></span></div>
+    <span style="font-size:15px;color:#44506B">Variant B for pages without fresh booking data.</span>
+  </div>
+</section>
+
+<section data-screen-label="Requirements audit" style="width:1440px;background:#FFFFFF;border-radius:28px;padding:48px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px">
+  <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:44px">Requirements audit</h2>
+  <p style="margin:0;font-size:18px;color:#44506B;line-height:1.5;max-width:1000px">Checked against the 57 SEO/marketing items and 10 draft comments. Homepage items and all 10 comments are covered. These are the items I didn't follow, or followed differently, and why.</p>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+    <sc-for list="{{ audit }}" as="a" hint-placeholder-count="10">
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:18px;border-radius:18px;background:{{ a.bg }}">
+        <span style="font:700 14px ui-monospace,monospace;color:#10183A">{{ a.id }}</span>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-weight:700;font-size:17px">{{ a.t }}</span><span style="font-size:16px;line-height:1.5;color:#44506B">{{ a.why }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+    const A=(id,t,why,k)=>({id,t,why,bg:k==='diff'?'#FFFAE8':(k==='later'?'#F3F6FC':'#FEF0EE')});
+    return {f:false,t:true,two:2,three:3,
+      audit:[
+        A('#21','Rotating pop-up pitches','Not followed. The brief rules out stacked pop-ups. The form heading and CTA change per page through props instead, so the pitch still varies.','no'),
+        A('#19','Reviews pop-up across the site','Done differently: one toast per visit, dismissible, with an aggregate figure instead of invented names.','diff'),
+        A('#57 note','Exit-intent offer','Not followed. Exit-intent overlays block content and add pressure. A closing consultation section does the job.','no'),
+        A('#40','Express Offer banner','Not on the homepage. It adds urgency. Better as a module on country pages, after eligibility checks are defined.','no'),
+        A('#7 / draft #4','Countries with a link','No "view all" link because there's no destinations page. Each country card links to its own country page.','diff'),
+        A('#36','Flags in the lead form','Followed using image flags rather than emoji, which avoids the browser gap the team flagged.','diff'),
+        A('#30','ChatGPT plugin','Out of scope for visual design. The AI-style prompt in the hero and search is the on-site version.','later'),
+        A('#51','Premium counselling','Not designed. It's a pricing decision. Adding it now would muddy the "free consultation" message.','later'),
+        A('#11–18, 27, 42, 46','Blog and prep page patterns','Need their own templates (table of contents, share bar, back to top, related-topics scroller). The tokens and cards here support them.','later'),
+        A('#23, 33, 35, 49, 54, 55','Evaluator, comparison, course finder, loan/stay forms','Separate pages. The homepage links into them (hero prompt, search, services). LeadForm can take extra fields for loan and stay pages.','later'),
+        A('#25, 26','About and contact pages','Out of scope. The branch dropdown sends people to the contact page, where counsellor names per branch would live.','later'),
+        A('Brief','Figures','Stats now use kanan.co\'s published numbers (25+ years, 2.4L+ students, 600+ partners, 240+ trainers). Unpublished claims (visa rate, Google rating) were removed. Award names, fees and branch list still need confirming.','diff')
+      ]};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&amp;display=block">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#10183A;background:#E9E6DF;-webkit-font-smoothing:antialiased}
+a{color:#2A55A3}a:hover{color:#0A7F47}
+*:focus-visible{outline:3px solid #FFCF25;outline-offset:2px}
+@keyframes kpulse{0%{box-shadow:0 0 0 0 rgba(12,146,83,.55)}70%{box-shadow:0 0 0 12px rgba(12,146,83,0)}100%{box-shadow:0 0 0 0 rgba(12,146,83,0)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div data-screen-label="Design system" style="width:1440px;background:#FAF8F3;padding:72px;box-sizing:border-box;display:flex;flex-direction:column;gap:72px">
+  <header style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;border-bottom:1px solid #DDE3EE;padding-bottom:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <img src="assets/kanan-logo.svg" alt="Kanan.co" style="height:36px;width:auto;align-self:flex-start">
+      <h1 style="margin:0;font-family:Outfit,sans-serif;font-weight:800;font-size:72px;line-height:1;letter-spacing:-0.03em">Kanan design system <span style="color:#0C9253">2026</span></h1>
+      <p style="margin:0;font-size:20px;line-height:1.5;color:#44506B;max-width:760px">Navy and green from the logo, extended into a full palette, with the logo's gold as the single warm accent. Built mobile-first for WCAG 2.2 AA.</p>
+    </div>
+    <div style="font:500 14px ui-monospace,monospace;color:#44506B;text-align:right;line-height:1.7">v1.0 · Oct 2026<br>Figtree / Outfit<br>Material Symbols Rounded</div>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:28px">
+    <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">01 Colour</h2>
+    <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:180px repeat(7,minmax(0,1fr));gap:12px;align-items:stretch">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:4px"><div style="font-weight:700;font-size:18px">{{ pal.name }}</div><div style="font-size:14px;color:#44506B;line-height:1.4">{{ pal.note }}</div></div>
+        <sc-for list="{{ pal.sw }}" as="s">
+          <div style="border-radius:16px;overflow:hidden;border:1px solid #DDE3EE;background:#FFFFFF;display:flex;flex-direction:column">
+            <div style="height:84px;background:{{ s.hex }};display:flex;align-items:flex-end;padding:10px;box-sizing:border-box;font-weight:700;font-size:15px;color:{{ s.on }}">Aa</div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:14px">{{ s.token }}</span><span style="font:500 13px ui-monospace,monospace;color:#44506B">{{ s.hex }}</span><span style="font-size:12px;color:#44506B">{{ s.use }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:#0E2350;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+        <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#FFCF25">Fix from draft · text on navy</div>
+        <div style="color:#FFFFFF;font-size:22px;font-weight:700">Primary text #FFFFFF — 15.2:1</div>
+        <div style="color:#CFDAF2;font-size:16px">Secondary text #CFDAF2 — 11.0:1. Never use alpha-dimmed white on navy, including in the footer.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+        <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#7A5200">Action colour</div>
+        <div style="font-size:22px;font-weight:700">Buttons use green-600 #0A7F47 — 5.1:1 with white</div>
+        <div style="color:#44506B;font-size:16px">Logo green #0C9253 is 4.0:1, so it is kept for icons, fills and large display text only.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">02 Type scale</h2>
+      <sc-for list="{{ types }}" as="t" hint-placeholder-count="8">
+        <div style="display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:baseline;border-bottom:1px solid #E6E2D8;padding-bottom:14px">
+          <div style="font:500 13px ui-monospace,monospace;color:#44506B;line-height:1.5">{{ t.name }}<br>{{ t.spec }}</div>
+          <div style="font-family:{{ t.ff }};font-weight:{{ t.w }};font-size:{{ t.size }};line-height:1.15;letter-spacing:{{ t.ls }};text-transform:{{ t.tt }}">{{ t.sample }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">03 Spacing &amp; radius</h2>
+      <sc-for list="{{ spaces }}" as="s" hint-placeholder-count="8">
+        <div style="display:flex;align-items:center;gap:16px"><span style="width:72px;font:500 13px ui-monospace,monospace;color:#44506B">{{ s.t }}</span><span style="height:20px;width:{{ s.px }};background:#2A55A3;border-radius:4px"></span><span style="font-size:14px;color:#44506B">{{ s.px }}</span></div>
+      </sc-for>
+      <div style="display:flex;gap:14px;margin-top:8px">
+        <sc-for list="{{ radii }}" as="r" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:64px;height:64px;background:#E6ECF8;border:2px solid #2A55A3;border-radius:{{ r.v }}"></div><span style="font:500 12px ui-monospace,monospace;color:#44506B">{{ r.t }}</span></div>
+        </sc-for>
+      </div>
+      <div style="font-size:15px;line-height:1.5;color:#44506B;background:#FFFFFF;border-radius:16px;padding:16px;border:1px solid #DDE3EE">Grid: 4-col / 16px margin at 390; 12-col / 80px margin, 1280 max at 1440. Section rhythm 64px mobile, 112px desktop. Touch targets ≥ 44px.</div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">04 Buttons</h2>
+    <div style="display:grid;grid-template-columns:140px repeat(4,minmax(0,1fr));gap:16px;align-items:center">
+      <span></span><span style="font:600 13px ui-monospace,monospace;color:#44506B">DEFAULT</span><span style="font:600 13px ui-monospace,monospace;color:#44506B">HOVER</span><span style="font:600 13px ui-monospace,monospace;color:#44506B">FOCUS</span><span style="font:600 13px ui-monospace,monospace;color:#44506B">DISABLED</span>
+      <span style="font-weight:700">Primary</span>
+      <button style="height:52px;padding:0 24px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 16px Figtree;cursor:pointer;justify-self:start" style-hover="background:#086B3C">Book free consultation</button>
+      <button style="height:52px;padding:0 24px;border:0;border-radius:14px;background:#086B3C;color:#FFFFFF;font:700 16px Figtree;justify-self:start;box-shadow:0 6px 16px rgba(8,107,60,.3)">Book free consultation</button>
+      <button style="height:52px;padding:0 24px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 16px Figtree;justify-self:start;outline:3px solid #FFCF25;outline-offset:2px">Book free consultation</button>
+      <button disabled style="height:52px;padding:0 24px;border:0;border-radius:14px;background:#E3E6EC;color:#6B7590;font:700 16px Figtree;justify-self:start">Book free consultation</button>
+      <span style="font-weight:700">Secondary</span>
+      <button style="height:52px;padding:0 24px;border-radius:14px;border:1.5px solid #2A55A3;background:#FFFFFF;color:#2A55A3;font:700 16px Figtree;cursor:pointer;justify-self:start" style-hover="background:#F3F6FC">Check my eligibility</button>
+      <button style="height:52px;padding:0 24px;border-radius:14px;border:1.5px solid #2A55A3;background:#E6ECF8;color:#1D3F86;font:700 16px Figtree;justify-self:start">Check my eligibility</button>
+      <button style="height:52px;padding:0 24px;border-radius:14px;border:1.5px solid #2A55A3;background:#FFFFFF;color:#2A55A3;font:700 16px Figtree;justify-self:start;outline:3px solid #FFCF25;outline-offset:2px">Check my eligibility</button>
+      <button disabled style="height:52px;padding:0 24px;border-radius:14px;border:1.5px solid #DDE3EE;background:#FFFFFF;color:#6B7590;font:700 16px Figtree;justify-self:start">Check my eligibility</button>
+      <span style="font-weight:700">WhatsApp</span>
+      <button style="height:52px;padding:0 22px;border:0;border-radius:26px;background:#0C9253;color:#FFFFFF;font:700 16px Figtree;display:flex;align-items:center;gap:8px;justify-self:start;animation:kpulse 2.4s ease-out infinite"><img src="assets/whatsapp.svg" alt="" style="width:20px;height:20px;flex:none">WhatsApp us</button>
+      <span style="font-size:14px;color:#44506B;grid-column:span 3">Gentle pulse every 2.4s; disabled under prefers-reduced-motion. 18px bold label meets 3:1 large-text rule on #0C9253.</span>
+      <span style="font-weight:700">Text link / ghost</span>
+      <a href="#" style="font-weight:700;font-size:16px;color:#2A55A3;display:flex;align-items:center;gap:4px;justify-self:start">See all UK universities<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a>
+      <button style="height:44px;padding:0 16px;border:0;border-radius:12px;background:transparent;color:#10183A;font:600 16px Figtree;display:flex;align-items:center;gap:6px;justify-self:start" style-hover="background:#F3F6FC"><span class="material-symbols-rounded" style="font-size:20px">call</span>+91 74050 11000</button>
+      <span style="font-size:14px;color:#44506B;grid-column:span 2"></span>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">05 Inputs</h2>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Default<input placeholder="e.g. Aarav Shah" style="height:52px;border-radius:12px;border:1.5px solid #C9D1E2;padding:0 14px;font:500 16px Figtree;color:#10183A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Focus<input value="Aarav" style="height:52px;border-radius:12px;border:1.5px solid #2A55A3;box-shadow:0 0 0 4px #E6ECF8;padding:0 14px;font:500 16px Figtree;color:#10183A"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Valid
+        <div style="display:flex;height:52px;border-radius:12px;border:1.5px solid #0A7F47;overflow:hidden;align-items:center;background:#FFFFFF"><span style="display:flex;align-items:center;gap:6px;padding:0 12px;height:100%;background:#F6F8FC;border-right:1.5px solid #DDE3EE;font-weight:600"><img src="https://flagcdn.com/w40/in.png" alt="India" style="width:22px;height:15px;border-radius:2px">+91</span><span style="flex:1;padding:0 14px;font-weight:500">98765 43210</span><span class="material-symbols-rounded" style="color:#0A7F47;margin-right:12px">check_circle</span></div>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Error<input value="98765" style="height:52px;border-radius:12px;border:1.5px solid #B42318;padding:0 14px;font:500 16px Figtree;color:#10183A"><span style="display:flex;align-items:center;gap:6px;color:#B42318;font-size:14px;font-weight:500"><span class="material-symbols-rounded" style="font-size:18px">error</span>Enter a valid 10-digit Indian mobile number</span></label>
+      <div style="display:flex;align-items:center;gap:10px;height:60px;border-radius:30px;background:#FFFFFF;border:1.5px solid #C9D1E2;padding:0 8px 0 20px;box-shadow:0 8px 24px rgba(14,35,80,.08)"><span class="material-symbols-rounded" style="color:#44506B">search</span><span style="flex:1;color:#6B7590;font-size:16px">Search courses, universities or countries</span><span style="height:44px;padding:0 18px;border-radius:22px;background:#2A55A3;color:#FFFFFF;font-weight:700;display:flex;align-items:center">Search</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">06 Chips &amp; badges</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="min-height:44px;display:flex;align-items:center;gap:8px;padding:0 16px;border-radius:22px;background:#2A55A3;color:#FFFFFF;font-weight:600"><img src="https://flagcdn.com/w40/gb.png" alt="" style="width:20px;height:14px;border-radius:2px">UK<span class="material-symbols-rounded" style="font-size:18px">check</span></span>
+        <span style="min-height:44px;display:flex;align-items:center;gap:8px;padding:0 16px;border-radius:22px;border:1.5px solid #DDE3EE;background:#FFFFFF;font-weight:600"><img src="https://flagcdn.com/w40/ca.png" alt="" style="width:20px;height:14px;border-radius:2px">Canada</span>
+        <span style="min-height:44px;display:flex;align-items:center;padding:0 16px;border-radius:22px;border:1.5px solid #DDE3EE;background:#FFFFFF;font-weight:600">Sep 2027</span>
+        <span style="min-height:44px;display:flex;align-items:center;gap:6px;padding:0 16px;border-radius:22px;background:#F3F6FC;color:#1D3F86;font-weight:600"><span class="material-symbols-rounded" style="font-size:18px">trending_up</span>MS in Data Science, Canada</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <span style="padding:4px 10px;border-radius:8px;background:#E2F4EA;color:#086B3C;font-weight:700;font-size:13px">2-year post-study work</span>
+        <span style="padding:4px 10px;border-radius:8px;background:#FFF4CC;color:#7A5200;font-weight:700;font-size:13px">Scholarships up to £10k</span>
+        <span style="padding:4px 10px;border-radius:8px;background:#E6ECF8;color:#1D3F86;font-weight:700;font-size:13px">Free webinar</span>
+        <span style="padding:4px 10px;border-radius:8px;background:#FEF0EE;color:#B42318;font-weight:700;font-size:13px">Deadline 15 Jan</span>
+       
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #DDE3EE;border-radius:16px;padding:12px 16px;align-self:flex-start">
+        <span style="width:40px;height:40px;border-radius:20px;background:#E2F4EA;display:flex;align-items:center;justify-content:center;color:#086B3C"><span class="material-symbols-rounded">verified</span></span>
+        <div style="display:flex;flex-direction:column"><span style="font-weight:800;font-size:18px">2.4L+ students</span><span style="font-size:14px;color:#44506B">guided abroad since 1996</span></div>
+      </div>
+      <h3 style="margin:8px 0 0;font-family:Outfit,sans-serif;font-weight:700;font-size:24px">Icons</h3>
+      <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:10px">
+        <sc-for list="{{ icons }}" as="i" hint-placeholder-count="16">
+          <div style="aspect-ratio:1;border-radius:14px;background:#FFFFFF;border:1px solid #DDE3EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span class="material-symbols-rounded" style="font-size:26px;color:#2A55A3">{{ i }}</span><span style="font:500 10px ui-monospace,monospace;color:#44506B">{{ i }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:36px">07 Cards</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:140px;background:repeating-linear-gradient(135deg,#D7DFEE 0 6px,#E6ECF8 6px 12px);display:flex;align-items:center;justify-content:center;font:500 12px ui-monospace,monospace;color:#44506B">photo: London campus</div>
+        <div style="padding:18px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px"><img src="https://flagcdn.com/w40/gb.png" alt="" style="width:24px;height:16px;border-radius:2px">United Kingdom</div><span style="align-self:flex-start;padding:4px 10px;border-radius:8px;background:#E2F4EA;color:#086B3C;font-weight:700;font-size:13px">1-year master's</span></div>
+        <div style="padding:0 18px 14px;font:500 11px ui-monospace,monospace;color:#44506B">Destination card</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px">
+        <span style="width:48px;height:48px;border-radius:14px;background:#E6ECF8;color:#2A55A3;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">school</span></span>
+        <div style="font-weight:700;font-size:19px">University &amp; course selection</div>
+        <div style="font-size:16px;line-height:1.5;color:#44506B">A shortlist built around your marks, budget and career plan.</div>
+        <span style="font:500 11px ui-monospace,monospace;color:#44506B">Service card</span>
+      </div>
+      <div style="background:#0E2350;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px;color:#FFFFFF">
+        <span style="font-family:Outfit;font-size:44px;line-height:.6;color:#FFCF25">“</span>
+        <div style="font-family:Outfit;font-weight:700;font-size:20px;line-height:1.25">My counsellor caught a gap in my SOP two days before the deadline.</div>
+        <div style="font-size:15px;color:#CFDAF2">Riya Patel · MSc Finance, University of Leeds</div>
+        <span style="font:500 11px ui-monospace,monospace;color:#CFDAF2">Testimonial card</span>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center">
+        <div style="width:64px;height:64px;flex:none;border-radius:32px;background:repeating-linear-gradient(135deg,#D7DFEE 0 4px,#E6ECF8 4px 8px);display:flex;align-items:center;justify-content:center;font:500 10px ui-monospace,monospace;color:#44506B">photo</div>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px">Priya Mehta</span><span style="font-size:14px;color:#44506B">Senior Counsellor · UK &amp; Ireland</span><span style="font-size:14px;color:#086B3C;font-weight:600">9 yrs experience</span><span style="font:500 11px ui-monospace,monospace;color:#44506B">Counsellor card</span></div>
+      </div>
+    </div>
+    <div style="font-size:15px;color:#44506B">Elevation: cards are flat with a 1px #DDE3EE border; hover lifts 2px with shadow 0 12px 28px rgba(14,35,80,.10). Motion: 150–250ms ease-out, feedback only.</div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+    const sw=(token,hex,use,on='#FFFFFF')=>({token,hex,use,on});
+    return {
+      palettes:[
+        {name:'Navy',note:'Logo blue #2A55A3, deepened for surfaces',sw:[sw('navy-950','#0A1A3D','Footer'),sw('navy-900','#0E2350','Dark sections'),sw('navy-700','#1D3F86','Hover, headings'),sw('navy-600','#2A55A3','Brand, links'),sw('navy-200','#C9D6F0','Borders on tint','#10183A'),sw('navy-100','#E6ECF8','Tint fills','#10183A'),sw('navy-50','#F3F6FC','Panels','#10183A')]},
+        {name:'Green',note:'Logo green #0C9253, action + success',sw:[sw('green-800','#065430','Pressed'),sw('green-700','#086B3C','Hover, text'),sw('green-600','#0A7F47','Primary button'),sw('green-500','#0C9253','Logo, icons'),sw('green-300','#7FE0A8','On navy','#10183A'),sw('green-100','#E2F4EA','Success tint','#10183A'),sw('green-50','#F1FAF5','Panels','#10183A')]},
+        {name:'Gold',note:'Warm accent from logo globe',sw:[sw('gold-800','#7A5200','Text on tint'),sw('gold-600','#DC9617','Stars, rules','#10183A'),sw('gold-500','#FFCF25','Highlight, focus','#10183A'),sw('gold-300','#FFE27A','Marker','#10183A'),sw('gold-100','#FFF4CC','Badge tint','#10183A'),sw('gold-50','#FFFAE8','Panels','#10183A'),sw('red-700','#B42318','Error only')]},
+        {name:'Neutral',note:'Warm off-white canvas',sw:[sw('ink-900','#10183A','Body text'),sw('ink-600','#44506B','Secondary text'),sw('ink-400','#6B7590','Placeholder'),sw('line','#DDE3EE','Borders','#10183A'),sw('canvas','#FAF8F3','Page bg','#10183A'),sw('sand','#F1FAF5','Alt section','#10183A'),sw('white','#FFFFFF','Cards','#10183A')]}
+      ],
+      types:[
+        {name:'Display',spec:'Outfit 800 · 72/76 · M 40',ff:"Outfit",w:800,size:'72px',ls:'-0.03em',tt:'none',sample:'Your future, abroad'},
+        {name:'H1',spec:'Outfit 800 · 56 · M 36',ff:"Outfit",w:800,size:'56px',ls:'-0.025em',tt:'none',sample:'Study in Canada'},
+        {name:'H2',spec:'Outfit 700 · 44 · M 30',ff:"Outfit",w:700,size:'44px',ls:'-0.02em',tt:'none',sample:'Where do you want to go?'},
+        {name:'H3',spec:'Outfit 700 · 24 · M 20',ff:"Outfit",w:700,size:'24px',ls:'-0.01em',tt:'none',sample:'Visa guidance that holds up'},
+        {name:'Body L',spec:'Figtree 400 · 20/30',ff:'Figtree',w:400,size:'20px',ls:'0',tt:'none',sample:'Honest advice on fees, loans and timelines.'},
+        {name:'Body',spec:'Figtree 400 · 16/24 (min)',ff:'Figtree',w:400,size:'16px',ls:'0',tt:'none',sample:'Book a free 30-minute call with a counsellor.'},
+        {name:'Small',spec:'Figtree 500 · 14/20',ff:'Figtree',w:500,size:'14px',ls:'0',tt:'none',sample:'Meta, captions, helper text only'},
+        {name:'Eyebrow',spec:'Figtree 700 · 13 · +8%',ff:'Figtree',w:700,size:'13px',ls:'0.08em',tt:'uppercase',sample:'Trusted since 1996'}
+      ],
+      spaces:[['s-1','4px'],['s-2','8px'],['s-3','12px'],['s-4','16px'],['s-6','24px'],['s-8','32px'],['s-12','48px'],['s-16','64px'],['s-28','112px']].map(([t,px])=>({t,px})),
+      radii:[['sm 8','8px'],['md 14','14px'],['lg 20','20px'],['xl 28','28px'],['pill','999px']].map(([t,v])=>({t,v})),
+      icons:['search','call','chat','event','school','flight_takeoff','description','workspace_premium','payments','home_work','verified','location_on','language','auto_awesome','download','play_circle']
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&amp;display=block">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#10183A;-webkit-font-smoothing:antialiased}
+a{color:#1B3C8C}a:hover{color:#0A7F47}
+*:focus-visible{outline:3px solid #F5B21E;outline-offset:2px}
+input::placeholder{color:#6B7590}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="background:#FFFFFF;font-family:Figtree,system-ui,sans-serif;color:#10183A;display:flex;flex-direction:column;gap:18px;padding:24px;box-sizing:border-box;height:100%;position:relative">
+  <sc-if value="{{ isSheet }}" hint-placeholder-val="{{ false }}">
+    <div style="width:44px;height:5px;border-radius:3px;background:#C9D1E2;margin:-12px auto 0"></div>
+  </sc-if>
+  <sc-if value="{{ isModal }}" hint-placeholder-val="{{ false }}">
+    <button aria-label="Close" style="position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:22px;border:0;background:#F1F4FA;color:#10183A;display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="material-symbols-rounded" style="font-size:22px">close</span></button>
+  </sc-if>
+  <sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px;padding-right:40px">
+        <div style="font-family:Outfit,sans-serif;font-weight:700;font-size:24px;line-height:1.15;letter-spacing:-0.01em;text-wrap:pretty">{{ heading }}</div>
+        <div style="font-size:16px;line-height:1.45;color:#44506B">{{ sub }}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:#44506B"><span>Step {{ step }} of 2</span><span>{{ stepLabel }}</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div style="height:6px;border-radius:3px;background:#0A7F47"></div>
+          <div style="height:6px;border-radius:3px;background:{{ bar2 }};transition:background .3s"></div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Full name
+        <input value="{{ name }}" onChange="{{ onName }}" placeholder="e.g. Aarav Shah" autocomplete="name" style="height:52px;border-radius:12px;border:1.5px solid {{ nameBorder }};padding:0 14px;font:500 16px Figtree,sans-serif;color:#10183A;outline:none;background:#FFFFFF">
+        <sc-if value="{{ nameErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;align-items:center;gap:6px;color:#B42318;font-size:14px;font-weight:500"><span class="material-symbols-rounded" style="font-size:18px">error</span>Please enter your full name</span></sc-if>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Mobile number
+        <div style="display:flex;height:52px;border-radius:12px;border:1.5px solid {{ phoneBorder }};overflow:hidden;background:#FFFFFF">
+          <button type="button" style="display:flex;align-items:center;gap:6px;padding:0 10px 0 12px;border:0;border-right:1.5px solid #DDE3EE;background:#F6F8FC;font:600 16px Figtree,sans-serif;color:#10183A;cursor:pointer"><img src="https://flagcdn.com/w40/in.png" alt="India" style="width:22px;height:15px;border-radius:2px;object-fit:cover">+91<span class="material-symbols-rounded" style="font-size:18px;color:#44506B">expand_more</span></button>
+          <input value="{{ phone }}" onChange="{{ onPhone }}" inputmode="numeric" placeholder="98765 43210" autocomplete="tel-national" style="flex:1;min-width:0;border:0;padding:0 14px;font:500 16px Figtree,sans-serif;color:#10183A;outline:none">
+          <sc-if value="{{ phoneOk }}" hint-placeholder-val="{{ false }}"><span class="material-symbols-rounded" style="align-self:center;margin-right:12px;color:#0A7F47;font-size:22px">check_circle</span></sc-if>
+        </div>
+        <sc-if value="{{ phoneErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;align-items:center;gap:6px;color:#B42318;font-size:14px;font-weight:500"><span class="material-symbols-rounded" style="font-size:18px">error</span>Enter a valid 10-digit Indian mobile number</span></sc-if>
+      </label>
+      <button onClick="{{ next }}" style="height:54px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 17px Figtree,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:transform .15s,background .15s" style-hover="background:#086B3C" style-active="transform:scale(.98)">Continue<span class="material-symbols-rounded" style="font-size:20px">arrow_forward</span></button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600">Email
+        <input value="{{ email }}" onChange="{{ onEmail }}" type="email" placeholder="you@example.com" autocomplete="email" style="height:52px;border-radius:12px;border:1.5px solid {{ emailBorder }};padding:0 14px;font:500 16px Figtree,sans-serif;color:#10183A;outline:none">
+        <sc-if value="{{ emailErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;align-items:center;gap:6px;color:#B42318;font-size:14px;font-weight:500"><span class="material-symbols-rounded" style="font-size:18px">error</span>Check your email address</span></sc-if>
+      </label>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:15px;font-weight:600">Preferred country</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ countryChips }}" as="c" hint-placeholder-count="6">
+            <sc-if value="{{ c.on }}"><button onClick="{{ c.pick }}" aria-pressed="true" style="min-height:44px;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:22px;border:1.5px solid #1B3C8C;background:#1B3C8C;color:#FFFFFF;font:600 15px Figtree,sans-serif;cursor:pointer"><img src="{{ c.flag }}" alt="" style="width:20px;height:14px;border-radius:2px;object-fit:cover">{{ c.label }}</button></sc-if>
+            <sc-if value="{{ c.off }}"><button onClick="{{ c.pick }}" aria-pressed="false" style="min-height:44px;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:22px;border:1.5px solid #DDE3EE;background:#FFFFFF;color:#10183A;font:600 15px Figtree,sans-serif;cursor:pointer" style-hover="border-color:#1B3C8C"><img src="{{ c.flag }}" alt="" style="width:20px;height:14px;border-radius:2px;object-fit:cover">{{ c.label }}</button></sc-if>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:15px;font-weight:600">Preferred intake</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ intakeChips }}" as="c" hint-placeholder-count="4">
+            <sc-if value="{{ c.on }}"><button onClick="{{ c.pick }}" aria-pressed="true" style="min-height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #1B3C8C;background:#1B3C8C;color:#FFFFFF;font:600 15px Figtree,sans-serif;cursor:pointer">{{ c.label }}</button></sc-if>
+            <sc-if value="{{ c.off }}"><button onClick="{{ c.pick }}" aria-pressed="false" style="min-height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #DDE3EE;background:#FFFFFF;color:#10183A;font:600 15px Figtree,sans-serif;cursor:pointer" style-hover="border-color:#1B3C8C">{{ c.label }}</button></sc-if>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button onClick="{{ back }}" aria-label="Back" style="width:54px;height:54px;flex:none;border-radius:14px;border:1.5px solid #DDE3EE;background:#FFFFFF;color:#10183A;display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="material-symbols-rounded">arrow_back</span></button>
+        <button onClick="{{ submit }}" style="flex:1;height:54px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 17px Figtree,sans-serif;cursor:pointer;transition:transform .15s,background .15s" style-hover="background:#086B3C" style-active="transform:scale(.98)">{{ cta }}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:8px 0">
+      <div style="width:64px;height:64px;border-radius:32px;background:#E3F5EB;color:#0A7F47;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:38px;font-variation-settings:'FILL' 1">check_circle</span></div>
+      <div style="font-family:Outfit,sans-serif;font-weight:700;font-size:26px;line-height:1.15">You're booked in, {{ firstName }}.</div>
+      <div style="font-size:16px;line-height:1.5;color:#44506B">Priya will call you on <b style="color:#10183A">+91 {{ phoneShown }}</b> within one working hour (Mon–Sat, 10am–7pm). We've also sent the details to WhatsApp.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;width:100%">
+        <a href="#" style="flex:1;min-width:160px;height:52px;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 16px Figtree,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none"><img src="assets/whatsapp.svg" alt="" style="width:20px;height:20px;flex:none">Open WhatsApp</a>
+        <a href="#" style="flex:1;min-width:160px;height:52px;border-radius:14px;border:1.5px solid #DDE3EE;color:#10183A;font:700 16px Figtree,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none"><span class="material-symbols-rounded" style="font-size:20px">travel_explore</span>Keep exploring</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#F3F6FC">
+    <div style="width:44px;height:44px;flex:none;border-radius:22px;background:repeating-linear-gradient(135deg,#D7DFEE 0 4px,#E6ECF8 4px 8px);display:flex;align-items:center;justify-content:center;font:600 9px ui-monospace,monospace;color:#44506B">photo</div>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:700">Priya Mehta <span style="font-weight:500;color:#44506B">· Senior Counsellor, {{ countryLabel }}</span></div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:14px;color:#44506B"><b style="color:#10183A">25+ years</b>· 2.4L+ students guided</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#44506B"><span class="material-symbols-rounded" style="font-size:16px">lock</span>Free, no obligation. We never share your number.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:640},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;modal&quot;,&quot;sheet&quot;],&quot;default&quot;:&quot;inline&quot;,&quot;tsType&quot;:&quot;'inline'|'modal'|'sheet'&quot;},&quot;initialStep&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[1,2,3],&quot;default&quot;:1,&quot;tsType&quot;:&quot;1|2|3&quot;},&quot;showErrors&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Talk to a study-abroad counsellor, free&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Get a shortlist of universities that fit your marks and budget.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Book my free consultation&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultCountry&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;UK&quot;,&quot;Canada&quot;,&quot;USA&quot;,&quot;Australia&quot;,&quot;Ireland&quot;,&quot;Germany&quot;,&quot;New Zealand&quot;],&quot;default&quot;:&quot;UK&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;counsellorRegion&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;UK &amp; Ireland&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(p){super(p);const s=p.initialStep??1;const e=!!p.showErrors;
+    this.state={step:s,name:e?'A':(s>1?'Aarav Shah':''),phone:e?'98765':(s>1?'9876543210':''),email:s>1?'aarav.shah@gmail.com':'',country:p.defaultCountry||'UK',intake:'Sep 2027',tried:e};}
+  componentDidUpdate(pp){const p=this.props;if(pp.initialStep!==p.initialStep||pp.showErrors!==p.showErrors||pp.defaultCountry!==p.defaultCountry){this.setState(new Component(p).state);}}
+  renderVals(){
+    const p=this.props,s=this.state,step=s.step;
+    const nameOk=s.name.trim().length>=2,phoneOk=/^[6-9]\d{9}$/.test(s.phone.replace(/\s/g,'')),emailOk=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email);
+    const err=(ok)=>s.tried&&!ok, bd=(ok)=>s.tried&&!ok?'#B42318':(ok?'#0A7F47':'#C9D1E2');
+    const countries=[['UK','gb'],['Canada','ca'],['USA','us'],['Australia','au'],['Ireland','ie'],['Germany','de'],['New Zealand','nz'],['Not sure yet','']];
+    const v=p.variant||'inline';
+    return {
+      isSheet:v==='sheet',isModal:v==='modal',
+      heading:p.heading??'Talk to a study-abroad counsellor, free',
+      sub:p.sub??'Get a shortlist of universities that fit your marks and budget.',
+      cta:p.cta??'Book my free consultation',
+      countryLabel:p.counsellorRegion??'UK & Ireland',
+      step:Math.min(step,2),stepLabel:step===1?'Your details':'Your plans',bar2:step>=2?'#0A7F47':'#E3E8F2',
+      notDone:step<3,isStep1:step===1,isStep2:step===2,isDone:step===3,
+      name:s.name,phone:s.phone,email:s.email,
+      onName:e=>this.setState({name:e.target.value}),
+      onPhone:e=>this.setState({phone:e.target.value.replace(/[^\d ]/g,'').slice(0,11)}),
+      onEmail:e=>this.setState({email:e.target.value}),
+      nameErr:err(nameOk),phoneErr:err(phoneOk),emailErr:err(emailOk),phoneOk,
+      nameBorder:bd(nameOk),phoneBorder:bd(phoneOk),emailBorder:s.tried&&step===2&&!emailOk?'#B42318':(emailOk?'#0A7F47':'#C9D1E2'),
+      next:()=>{if(nameOk&&phoneOk)this.setState({step:2,tried:false});else this.setState({tried:true});},
+      back:()=>this.setState({step:1}),
+      submit:()=>{if(emailOk)this.setState({step:3});else this.setState({tried:true});},
+      countryChips:countries.map(([l,f])=>({label:l,flag:f?`https://flagcdn.com/w40/${f}.png`:'https://flagcdn.com/w40/un.png',on:s.country===l,off:s.country!==l,pick:()=>this.setState({country:l})})),
+      intakeChips:['Jan 2027','May 2027','Sep 2027','2028 or later'].map(l=>({label:l,on:s.intake===l,off:s.intake!==l,pick:()=>this.setState({intake:l})})),
+      firstName:(s.name.trim().split(' ')[0])||'Aarav',phoneShown:s.phone||'98765 43210'
+    };
+  }
+}
+</script>
+</body>
+</html>

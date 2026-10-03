@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&amp;display=block">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#10183A;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+a{color:#2A55A3}a:hover{color:#0A7F47}
+*:focus-visible{outline:3px solid #FFCF25;outline-offset:2px}
+input::placeholder{color:#6B7590}
+@keyframes kpulse{0%{box-shadow:0 0 0 0 rgba(12,146,83,.55)}70%{box-shadow:0 0 0 12px rgba(12,146,83,0)}100%{box-shadow:0 0 0 0 rgba(12,146,83,0)}}
+@keyframes kup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+<meta name="ext-resource-dependency" content="assets/hero-student.webp">
+<meta name="ext-resource-dependency" content="assets/kanan-branch-counselling.webp">
+<meta name="ext-resource-dependency" content="assets/leeds-campus.webp">
+<meta name="ext-resource-dependency" content="assets/waterloo-campus.webp">
+<meta name="ext-resource-dependency" content="assets/monash-campus.webp">
+<meta name="ext-resource-dependency" content="assets/asu-campus.webp">
+<meta name="ext-resource-dependency" content="assets/data-science-lab.webp">
+<meta name="ext-resource-dependency" content="assets/intl-business.webp">
+<meta name="ext-resource-dependency" content="assets/nursing-lab.webp">
+<meta name="ext-resource-dependency" content="assets/computer-science-lab.webp">
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0E2350"></rect><text x="50" y="64" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="700" font-size="44" fill="#FFCF25">K</text></svg></template>
+</helmet>
+<div ref="{{ rootRef }}" data-screen-label="Homepage" style="width:100%;overflow-x:clip;margin:0 auto;background:#FFFFFF;font-family:Figtree,system-ui,sans-serif;color:#10183A;position:relative">
+
+<header style="position:sticky;top:0;z-index:50" onMouseLeave="{{ closeHover }}">
+  <div style="background:#0E2350;color:#FFFFFF">
+    <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;height:44px;display:flex;align-items:center;justify-content:space-between;font-size:14px">
+      <sc-if value="{{ showTagline }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:8px;color:#CFDAF2"><span class="material-symbols-rounded" style="font-size:18px;color:#FFCF25">verified</span>Guiding Indian students abroad since 1996 · 25+ years</div></sc-if>
+      <div style="display:flex;align-items:center;gap:4px;margin-left:auto">
+        <button onClick="{{ toggleBranch }}" aria-expanded="{{ branchOpen }}" style="height:44px;display:flex;align-items:center;gap:6px;padding:0 12px;border:0;background:transparent;color:#FFFFFF;font:600 14px Figtree;cursor:pointer"><span class="material-symbols-rounded" style="font-size:18px">location_on</span>Find a branch<span class="material-symbols-rounded" style="font-size:18px">expand_more</span></button>
+        <a href="tel:+917969000000" style="height:44px;display:flex;align-items:center;gap:6px;padding:0 12px;color:#FFFFFF;font-weight:600;text-decoration:none"><span class="material-symbols-rounded" style="font-size:18px">call</span>+91 79 6900 0000</a>
+        <sc-if value="{{ notPhone }}" hint-placeholder-val="{{ true }}"><a href="#" style="height:44px;display:flex;align-items:center;padding:0 12px;color:#FFFFFF;font-weight:600;text-decoration:none">Student login</a></sc-if>
+      </div>
+    </div>
+  </div>
+  <div style="background:#FFFFFF;border-bottom:1px solid #DDE3EE">
+    <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;height:80px;display:flex;align-items:center;gap:clamp(8px,1.1vw,16px)">
+      <a href="#" aria-label="Kanan.co home" style="display:flex;flex:none"><img src="assets/kanan-logo.svg" alt="Kanan.co — Let's Grow Globally" style="height:clamp(22px,2.2vw,30px);width:auto"></a>
+      <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;flex:1;min-width:0">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5"><button onMouseEnter="{{ n.enter }}" onClick="{{ n.click }}" aria-expanded="{{ n.on }}" style="height:48px;flex:none;white-space:nowrap;display:flex;align-items:center;gap:2px;padding:0 clamp(6px,0.8vw,12px);border:0;border-radius:12px;background:{{ n.bg }};color:{{ n.color }};font:600 clamp(15px,1.15vw,16px) Figtree;cursor:pointer;transition:background .15s">{{ n.label }}<sc-if value="{{ n.hasMenu }}"><span class="material-symbols-rounded" style="font-size:20px">expand_more</span></sc-if></button></sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ isCompact }}" hint-placeholder-val="{{ false }}"><span style="flex:1"></span></sc-if>
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ openSearch }}" aria-label="Search courses, universities and countries" style="height:48px;width:160px;flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:24px;border:1.5px solid #DDE3EE;background:#F3F6FC;color:#44506B;font:500 15px Figtree;cursor:text;text-align:left"><span class="material-symbols-rounded" style="font-size:20px">search</span>Search…</button>
+        <a href="#" style="height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;flex:none;white-space:nowrap;border-radius:24px;background:#0C9253;color:#FFFFFF;font-weight:700;font-size:16px;text-decoration:none;animation:kpulse 2.4s ease-out infinite"><img src="assets/whatsapp.svg" alt="" style="width:20px;height:20px;flex:none">WhatsApp</a>
+      </sc-if>
+      <sc-if value="{{ notWide }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ openSearch }}" aria-label="Search courses, universities and countries" style="width:48px;height:48px;flex:none;border-radius:24px;display:flex;align-items:center;justify-content:center;border:1.5px solid #DDE3EE;background:#F3F6FC;color:#10183A;cursor:pointer"><span class="material-symbols-rounded">search</span></button>
+      </sc-if>
+      <sc-if value="{{ showWaIcon }}" hint-placeholder-val="{{ false }}">
+        <a href="#" aria-label="WhatsApp us" style="width:48px;height:48px;flex:none;border-radius:24px;display:flex;align-items:center;justify-content:center;background:#0C9253;color:#FFFFFF;text-decoration:none;animation:kpulse 2.4s ease-out infinite"><img src="assets/whatsapp.svg" alt="" style="width:24px;height:24px;flex:none"></a>
+      </sc-if>
+      <sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ openModal }}" style="height:48px;padding:0 clamp(14px,1.3vw,18px);flex:none;white-space:nowrap;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 clamp(15px,1.15vw,16px) Figtree;cursor:pointer;transition:background .15s,transform .15s" style-hover="background:#086B3C" style-active="transform:scale(.98)">{{ ctaLabel }}</button>
+      </sc-if>
+      <sc-if value="{{ isCompact }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleDrawer }}" aria-label="Menu" aria-expanded="{{ drawerOn }}" style="width:48px;height:48px;flex:none;border-radius:24px;display:flex;align-items:center;justify-content:center;border:0;background:#0E2350;color:#FFFFFF;cursor:pointer"><span class="material-symbols-rounded">{{ drawerIcon }}</span></button>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ drawerOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;top:124px;bottom:0;z-index:60;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#FFFFFF;box-shadow:0 24px 48px rgba(14,35,80,.14);animation:kup .2s ease-out">
+      <div style="width:min(720px, calc(100% - 32px));margin:0 auto;padding:8px 0 32px;display:flex;flex-direction:column">
+        <sc-if value="{{ hasDrill }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px;padding-top:8px">
+          <button onClick="{{ drillBack }}" style="align-self:flex-start;min-height:44px;display:flex;align-items:center;gap:6px;border:0;background:transparent;font:700 16px Figtree;color:#2A55A3;padding:0;cursor:pointer"><span class="material-symbols-rounded">arrow_back</span>All destinations</button>
+          <div style="display:flex;align-items:center;gap:12px"><img data-img="{{ drill.flag }}" alt="" style="width:36px;height:24px;border-radius:4px;object-fit:cover;box-shadow:0 0 0 1px #DDE3EE"><span style="font-family:Outfit;font-weight:700;font-size:26px;line-height:1.15">Study in {{ drill.name }}</span></div>
+          <a href="{{ drill.href }}" style="min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:14px;background:#0E2350;color:#FFFFFF;font-weight:700;font-size:16px;text-decoration:none"><span style="flex:1;min-width:0">{{ drill.name }} guide: costs, visas, intakes</span><span class="material-symbols-rounded">arrow_forward</span></a>
+          <sc-for list="{{ drill.cols }}" as="col" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;border-bottom:1px solid #DDE3EE;padding-bottom:12px">
+              <span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C;padding-bottom:4px">{{ col.t }}</span>
+              <sc-for list="{{ col.links }}" as="l"><a href="#" style="min-height:44px;display:flex;align-items:center;justify-content:space-between;color:#10183A;font-size:16px;text-decoration:none">{{ l }}<span class="material-symbols-rounded" style="font-size:20px;color:#44506B">chevron_right</span></a></sc-for>
+            </div>
+          </sc-for>
+          <a href="#" style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:#FFFAE8;border:1px solid #FFE27A;color:#10183A;text-decoration:none"><span class="material-symbols-rounded" style="color:#DC9617">auto_awesome</span><span style="flex:1;font-size:15px;line-height:1.4"><b>Where can you get in for {{ drill.name }}?</b> Evaluate my profile</span><span class="material-symbols-rounded">chevron_right</span></a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noDrill }}" hint-placeholder-val="{{ true }}"><sc-for list="{{ drawerSections }}" as="d" hint-placeholder-count="3">
+          <div style="border-bottom:1px solid #DDE3EE">
+            <button onClick="{{ d.toggle }}" aria-expanded="{{ d.open }}" style="width:100%;min-height:60px;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;font:700 19px Figtree;color:#10183A;cursor:pointer;text-align:left;padding:0">{{ d.t }}<span class="material-symbols-rounded" style="color:#2A55A3">{{ d.icon }}</span></button>
+            <sc-if value="{{ d.open }}"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:6px;padding-bottom:16px"><sc-for list="{{ d.items }}" as="i"><a href="{{ i.href }}" onClick="{{ i.go }}" style="min-height:48px;display:flex;align-items:center;gap:12px;padding:0 12px;border-radius:12px;background:#F3F6FC;color:#10183A;text-decoration:none;font-weight:600;font-size:16px"><sc-if value="{{ i.flag }}"><img data-img="{{ i.flag }}" alt="" style="width:24px;height:16px;border-radius:2px;object-fit:cover"></sc-if><span style="flex:1">{{ i.l }}</span><span class="material-symbols-rounded" style="font-size:20px;color:#44506B">chevron_right</span></a></sc-for></div></sc-if>
+          </div>
+        </sc-for>
+        <a href="#" style="min-height:60px;display:flex;align-items:center;border-bottom:1px solid #DDE3EE;font:700 19px Figtree;color:#10183A;text-decoration:none">Events</a>
+        <a href="#" style="min-height:60px;display:flex;align-items:center;border-bottom:1px solid #DDE3EE;font:700 19px Figtree;color:#10183A;text-decoration:none">About Kanan</a>
+        </sc-if>
+        <div style="margin-top:20px;padding:20px;border-radius:20px;background:#0E2350;color:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:Outfit;font-weight:700;font-size:20px">Talk to a counsellor today</span>
+          <button onClick="{{ openModal }}" style="height:52px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 16px Figtree;cursor:pointer">Book free consultation</button>
+          <a href="tel:+917969000000" style="min-height:44px;display:flex;align-items:center;gap:8px;color:#FFFFFF;font-weight:700;text-decoration:none"><span class="material-symbols-rounded" style="color:#7FE0A8">call</span>+91 79 6900 0000</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ studyOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;right:0;top:124px;background:#FFFFFF;border-bottom:1px solid #DDE3EE;box-shadow:0 24px 48px rgba(14,35,80,.14);animation:kup .2s ease-out">
+      <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr) auto;gap:clamp(20px,2.5vw,32px);padding:32px 0 36px">
+        <div style="display:flex;flex-direction:column;gap:2px;border-right:1px solid #DDE3EE;padding-right:24px">
+          <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#44506B;padding:0 12px 10px">Study in</div>
+          <sc-for list="{{ megaCountries }}" as="c" hint-placeholder-count="10">
+            <button onMouseEnter="{{ c.pick }}" onFocus="{{ c.pick }}" style="height:44px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0;border-radius:12px;background:{{ c.bg }};color:#10183A;font:600 16px Figtree;cursor:pointer;text-align:left"><img data-img="{{ c.flag }}" alt="" style="width:24px;height:16px;border-radius:2px;object-fit:cover">{{ c.name }}<span class="material-symbols-rounded" style="margin-left:auto;font-size:18px;color:{{ c.arrow }}">chevron_right</span></button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between"><div style="font-family:Outfit;font-weight:700;font-size:28px">Study in {{ mc.name }}</div><a href="{{ mc.href }}" style="font-weight:700;display:flex;align-items:center;gap:4px"><span>{{ mc.name }} guide: costs, visas, intakes</span><span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:24px">
+            <sc-for list="{{ mc.cols }}" as="col" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C;padding-bottom:6px">{{ col.title }}</div>
+                <sc-for list="{{ col.links }}" as="l"><a href="#" style="min-height:40px;display:flex;align-items:center;color:#10183A;font-size:16px;text-decoration:none;line-height:1.3" style-hover="color:#2A55A3;text-decoration:underline">{{ l }}</a></sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}"><div style="background:#0E2350;border-radius:20px;padding:24px;width:300px;box-sizing:border-box;height:100%;display:flex;flex-direction:column;gap:12px;color:#FFFFFF">
+          <span class="material-symbols-rounded" style="font-size:32px;color:#FFCF25">auto_awesome</span>
+          <div style="font-family:Outfit;font-weight:700;font-size:22px;line-height:1.2">Where can you get in for {{ mc.name }}?</div>
+          <div style="font-size:16px;line-height:1.5;color:#CFDAF2">Share your marks and budget. Get a matched shortlist in 2 minutes.</div>
+          <a href="#" style="margin-top:auto;height:48px;border-radius:14px;background:#FFCF25;color:#0E2350;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none">Evaluate my profile</a>
+        </div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ examsOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;right:0;top:124px;background:#FFFFFF;border-bottom:1px solid #DDE3EE;box-shadow:0 24px 48px rgba(14,35,80,.14);animation:kup .2s ease-out">
+      <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;padding:32px 0 36px">
+        <sc-for list="{{ exams }}" as="e" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:18px;background:#F3F6FC">
+            <div style="font-family:Outfit;font-weight:800;font-size:24px;color:#1D3F86">{{ e.name }}</div>
+            <div style="font-size:14px;color:#44506B;padding-bottom:8px;line-height:1.4">{{ e.desc }}</div>
+            <sc-for list="{{ e.links }}" as="l"><a href="#" style="min-height:40px;display:flex;align-items:center;color:#10183A;font-size:16px;text-decoration:none" style-hover="color:#2A55A3;text-decoration:underline">{{ l }}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;right:0;top:124px;background:#FFFFFF;border-bottom:1px solid #DDE3EE;box-shadow:0 24px 48px rgba(14,35,80,.14);animation:kup .2s ease-out">
+      <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;padding:32px 0 36px">
+        <sc-for list="{{ resources }}" as="r" hint-placeholder-count="4">
+          <a href="#" style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:18px;border:1px solid #DDE3EE;text-decoration:none;color:#10183A;transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,35,80,.10)">
+            <span style="width:44px;height:44px;border-radius:12px;background:#E6ECF8;color:#2A55A3;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">{{ r.icon }}</span></span>
+            <span style="font-weight:700;font-size:18px">{{ r.title }}</span>
+            <span style="font-size:15px;color:#44506B;line-height:1.45">{{ r.desc }}</span>
+          </a>
+        </sc-for>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C;padding-bottom:6px">Trending reads</div>
+          <sc-for list="{{ trendingReads }}" as="t"><a href="#" style="min-height:40px;display:flex;align-items:center;gap:8px;color:#10183A;text-decoration:none;font-size:16px;line-height:1.35" style-hover="color:#2A55A3"><span class="material-symbols-rounded" style="font-size:18px;color:#0C9253">trending_up</span>{{ t }}</a></sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ branchOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;top:44px;right:max(16px, calc((100% - 1280px) / 2 + 150px));width:min(640px, calc(100% - 32px));box-sizing:border-box;background:#FFFFFF;border-radius:20px;box-shadow:0 24px 48px rgba(14,35,80,.20);border:1px solid #DDE3EE;padding:24px;display:flex;flex-direction:column;gap:18px;animation:kup .2s ease-out">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:Outfit;font-weight:700;font-size:22px">Visit a Kanan branch</div></div>
+      <div style="display:flex;align-items:center;gap:10px;height:48px;border-radius:12px;border:1.5px solid #C9D1E2;padding:0 14px"><span class="material-symbols-rounded" style="color:#44506B">search</span><span style="color:#6B7590">Search your city</span><span style="margin-left:auto;display:flex;align-items:center;gap:4px;color:#2A55A3;font-weight:600;font-size:14px"><span class="material-symbols-rounded" style="font-size:18px">my_location</span>Use my location</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px">
+        <sc-for list="{{ branches }}" as="b" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C;padding-bottom:4px">{{ b.state }}</div>
+            <sc-for list="{{ b.cities }}" as="c"><a href="#" style="min-height:36px;display:flex;align-items:center;color:#10183A;text-decoration:none;font-size:16px" style-hover="color:#2A55A3;text-decoration:underline">{{ c }}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <a href="#" style="font-weight:700;display:flex;align-items:center;gap:4px">See all branches with timings and counsellor names<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;right:0;top:124px;background:#FFFFFF;border-bottom:1px solid #DDE3EE;box-shadow:0 24px 48px rgba(14,35,80,.14);animation:kup .2s ease-out">
+      <div style="width:min(880px, calc(100% - 32px));margin:0 auto;padding:28px 0 36px;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;align-items:center;gap:12px;height:64px;border-radius:32px;border:2px solid #2A55A3;box-shadow:0 0 0 5px #E6ECF8;padding:0 10px 0 22px"><span class="material-symbols-rounded" style="color:#2A55A3">search</span><input value="{{ q }}" onChange="{{ onQ }}" placeholder="Try “MS in Data Science Canada” or “University of Leeds”" style="flex:1;min-width:0;border:0;outline:none;font:500 18px Figtree;color:#10183A;background:transparent"><button onClick="{{ closeAll }}" aria-label="Close search" style="width:44px;height:44px;border-radius:22px;border:0;background:#F3F6FC;display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="material-symbols-rounded">close</span></button></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#44506B">Trending this week</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ trending }}" as="t" hint-placeholder-count="6"><a href="#" style="min-height:44px;display:flex;align-items:center;gap:6px;padding:0 14px;border-radius:22px;background:#F3F6FC;color:#1D3F86;font-weight:600;text-decoration:none" style-hover="background:#E6ECF8"><span class="material-symbols-rounded" style="font-size:18px">trending_up</span>{{ t }}</a></sc-for></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#44506B;padding-bottom:6px">Suggested for you</div>
+            <sc-for list="{{ suggestions }}" as="s" hint-placeholder-count="4"><a href="#" style="min-height:52px;display:flex;align-items:center;gap:12px;padding:0 10px;border-radius:12px;color:#10183A;text-decoration:none" style-hover="background:#F3F6FC"><span style="width:36px;height:36px;border-radius:10px;background:#E6ECF8;color:#2A55A3;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:20px">{{ s.icon }}</span></span><span style="display:flex;flex-direction:column"><span style="font-weight:600">{{ s.t }}</span><span style="font-size:14px;color:#44506B">{{ s.k }}</span></span></a></sc-for>
+          </div>
+        </div>
+        <a href="#" style="display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:18px;background:#FFFAE8;border:1px solid #FFE27A;color:#10183A;text-decoration:none"><span class="material-symbols-rounded" style="color:#DC9617;font-size:28px">auto_awesome</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-weight:700;font-size:17px">Not sure what to search? Tell us your marks, budget and dream country.</span><span style="font-size:15px;color:#44506B">Our profile evaluator suggests universities you can realistically get into.</span></span><span class="material-symbols-rounded">arrow_forward</span></a>
+      </div>
+    </div>
+  </sc-if>
+</header>
+<main>
+<section data-screen-label="Hero" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;padding:clamp(32px,4.5vw,64px) 0 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,56px);align-items:center">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;background:#E2F4EA;color:#086B3C;font-weight:700;font-size:14px"><span class="material-symbols-rounded" style="font-size:18px">verified</span>Free counselling · No hidden agent fees</span>
+    <h1 style="margin:0;font-family:Outfit,sans-serif;font-weight:600;font-size:clamp(34px,4.2vw,56px);line-height:1.08;letter-spacing:-0.02em;text-wrap:balance">Know where you can get in, <span style="color:#2A55A3">and what it will really cost.</span></h1>
+    <p style="margin:0;font-size:20px;line-height:1.5;color:#44506B;max-width:600px">Compare 600+ partner institutions across 12 countries, then plan it with a counsellor who has done this for 25 years.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <button onClick="{{ openSearch }}" style="display:flex;align-items:center;gap:12px;height:68px;border-radius:34px;background:#FFFFFF;border:1.5px solid #C9D1E2;padding:0 8px 0 24px;box-shadow:0 12px 32px rgba(14,35,80,.10);cursor:text;text-align:left;font:inherit"><span class="material-symbols-rounded" style="color:#2A55A3">search</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#6B7590;font-size:18px">Search courses, universities or countries</span><span style="height:52px;padding:0 24px;border-radius:26px;background:#2A55A3;color:#FFFFFF;font-weight:700;font-size:16px;display:flex;align-items:center">Search</span></button>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;color:#44506B"><span style="font-weight:600">Trending:</span><sc-for list="{{ heroTrending }}" as="t" hint-placeholder-count="4"><a href="#" style="min-height:36px;display:flex;align-items:center;padding:0 12px;border-radius:18px;border:1px solid #DDE3EE;background:#FFFFFF;color:#1D3F86;font-weight:600;text-decoration:none" style-hover="border-color:#2A55A3">{{ t }}</a></sc-for></div>
+      <a href="#" style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:18px;background:#FFFAE8;border:1px dashed #DC9617;color:#10183A;text-decoration:none;max-width:560px" style-hover="background:#FFF4CC"><span class="material-symbols-rounded" style="color:#DC9617;font-size:26px">auto_awesome</span><span style="flex:1;font-size:16px;line-height:1.4"><b>Tell us your marks, budget and dream country.</b> Get a matched shortlist in 2 minutes.</span><span class="material-symbols-rounded">arrow_forward</span></a>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <button onClick="{{ openModal }}" style="height:60px;padding:0 30px;border:0;border-radius:16px;background:#0A7F47;color:#FFFFFF;font:700 18px Figtree;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s,transform .15s" style-hover="background:#086B3C" style-active="transform:scale(.98)">Book free consultation<span class="material-symbols-rounded">arrow_forward</span></button>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="width:44px;height:44px;border-radius:22px;background:#E2F4EA;border:1px solid #DDE3EE;display:flex;align-items:center;justify-content:center;color:#086B3C"><span class="material-symbols-rounded">verified</span></span>
+        <div style="display:flex;flex-direction:column"><span style="font-weight:800;font-size:18px">2.4L+ students</span><span style="font-size:14px;color:#44506B">guided abroad since 1996</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:clamp(420px,48vw,640px)">
+    <img src="assets/hero-student.webp" fetchpriority="high" decoding="async" alt="Indian student smiling on a university campus abroad" style="position:absolute;inset:0 0 40px 40px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:cover;object-position:50% 25%;border-radius:32px;display:block">
+    <div style="position:absolute;top:32px;right:-16px;padding:12px 16px;border-radius:16px;background:#FFCF25;color:#0E2350;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;box-shadow:0 12px 28px rgba(14,35,80,.18)"><span class="material-symbols-rounded" style="font-size:20px">flight_takeoff</span>Sep 2027 applications open</div>
+    <div style="position:absolute;left:0;bottom:0;width:min(360px, calc(100% - 24px));box-sizing:border-box;background:#FFFFFF;border-radius:22px;padding:18px;box-shadow:0 20px 44px rgba(14,35,80,.18);display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:14px;align-items:center">
+        <div style="width:60px;height:60px;flex:none;border-radius:30px;background:repeating-linear-gradient(135deg,#D7DFEE 0 4px,#E6ECF8 4px 8px);display:flex;align-items:center;justify-content:center;font:500 10px ui-monospace,monospace;color:#44506B">photo</div>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px">Priya Mehta</span><span style="font-size:14px;color:#44506B">Senior Counsellor · UK &amp; Ireland</span><span style="display:flex;align-items:center;gap:4px;font-size:14px;color:#086B3C;font-weight:600"><span style="width:8px;height:8px;border-radius:4px;background:#0C9253"></span>Available today till 7pm</span></div>
+      </div>
+      <div style="font-size:15px;line-height:1.45;color:#44506B">“Bring your marksheet and a budget. I'll tell you honestly where you stand.”</div>
+      <div style="display:flex;gap:8px">
+        <a href="#" style="flex:1;height:44px;border-radius:12px;background:#0C9253;color:#FFFFFF;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none"><img src="assets/whatsapp.svg" alt="" style="width:18px;height:18px;flex:none">WhatsApp Priya</a>
+        <a href="tel:+917969000000" style="flex:1;height:44px;border-radius:12px;border:1.5px solid #DDE3EE;color:#10183A;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none"><span class="material-symbols-rounded" style="font-size:18px">call</span>Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Kanan in numbers" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto 40px;background:#0E2350;border-radius:28px;padding:clamp(24px,3vw,36px) clamp(20px,3.4vw,48px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:24px;color:#FFFFFF">
+  <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+    <div style="display:flex;flex-direction:column;gap:4px;border-left:2px solid #2A55A3;padding-left:20px">
+      <div style="font-family:Outfit;font-weight:800;font-size:clamp(36px,3.8vw,52px);line-height:1;color:#FFFFFF">{{ st.v }}</div>
+      <div style="font-size:17px;color:#CFDAF2">{{ st.l }}</div>
+    </div>
+  </sc-for>
+</section>
+
+<section data-screen-label="Destinations" style="padding:clamp(64px,7vw,96px) 0 40px">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;padding-bottom:32px">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Destinations</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">Where do you want to study?</h2></div>
+    <div style="display:flex;gap:10px">
+      <button onClick="{{ slidePrev }}" aria-label="Previous destinations" style="width:52px;height:52px;border-radius:26px;border:1.5px solid #C9D1E2;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="border-color:#2A55A3"><span class="material-symbols-rounded">arrow_back</span></button>
+      <button onClick="{{ slideNext }}" aria-label="Next destinations" style="width:52px;height:52px;border-radius:26px;border:0;background:#2A55A3;color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#1D3F86"><span class="material-symbols-rounded">arrow_forward</span></button>
+    </div>
+  </div>
+  <div ref="{{ sliderRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(clamp(16px,3vw,48px), calc((100% - 1280px) / 2)) 24px;scrollbar-width:none;scroll-behavior:smooth">
+    <sc-for list="{{ destinations }}" as="d" hint-placeholder-count="5">
+      <a href="{{ d.href }}" style="flex:none;width:248px;scroll-snap-align:start;background:#FFFFFF;border:1px solid #DDE3EE;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px;text-decoration:none;color:#10183A;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(14,35,80,.12)">
+        <img data-img="{{ d.flag }}" alt="" style="width:64px;height:44px;border-radius:8px;object-fit:cover;box-shadow:0 0 0 1px #DDE3EE">
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:Outfit;font-weight:700;font-size:24px">{{ d.name }}</span><span style="font-size:15px;color:#44506B">{{ d.unis }}</span></div>
+        <span style="align-self:flex-start;padding:6px 10px;border-radius:8px;background:#E2F4EA;color:#086B3C;font-weight:700;font-size:14px">{{ d.tag }}</span>
+        <span style="margin-top:auto;display:flex;align-items:center;gap:4px;font-weight:700;font-size:15px;color:#2A55A3">Study in {{ d.short }}<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Services" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;padding:72px 0 clamp(64px,8vw,clamp(64px,8vw,112px));display:flex;flex-direction:column;gap:36px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px 48px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">How we help</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">One team, from first test to first day</h2></div>
+    <p style="margin:0;font-size:18px;line-height:1.55;color:#44506B">Use only what you need. Every service starts with a free conversation and a written plan.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:20px">
+    <sc-for list="{{ services }}" as="sv" hint-placeholder-count="6">
+      <a href="#" style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;text-decoration:none;color:#10183A;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(14,35,80,.10)">
+        <span style="width:56px;height:56px;border-radius:16px;background:#E6ECF8;color:#2A55A3;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded" style="font-size:28px">{{ sv.icon }}</span></span>
+        <span style="font-family:Outfit;font-weight:700;font-size:24px;line-height:1.15">{{ sv.t }}</span>
+        <span style="font-size:16px;line-height:1.55;color:#44506B">{{ sv.d }}</span>
+        <span style="margin-top:auto;padding-top:6px;display:flex;align-items:center;gap:4px;font-weight:700;color:#2A55A3">{{ sv.cta }}<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+<section data-screen-label="Find your university" style="background:#F1FAF5;padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Find your university</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">What Indian students are choosing now</h2></div>
+      <div role="tablist" style="display:flex;padding:5px;border-radius:30px;background:#FFFFFF;border:1px solid #DDE3EE">
+        <sc-for list="{{ uniTabs }}" as="t" hint-placeholder-count="2"><button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="height:46px;padding:0 22px;border-radius:23px;border:0;background:{{ t.bg }};color:{{ t.color }};font:700 16px Figtree;cursor:pointer;transition:background .2s">{{ t.label }}</button></sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:20px">
+      <sc-for list="{{ uniCards }}" as="u" hint-placeholder-count="4">
+        <a href="#" style="background:#FFFFFF;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#10183A;border:1px solid #DDE3EE;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(14,35,80,.10)">
+          <div style="height:132px;background:repeating-linear-gradient(135deg,#D7DFEE 0 6px,#E6ECF8 6px 12px);display:flex;align-items:center;justify-content:center;font:500 12px ui-monospace,monospace;color:#44506B;position:relative">{{ u.img }}<sc-if value="{{ u.photo }}"><img data-img="{{ u.photo }}" loading="lazy" decoding="async" alt="{{ u.name }} campus" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if><img data-img="{{ u.flag }}" alt="" style="position:absolute;top:12px;left:12px;width:32px;height:22px;border-radius:4px;object-fit:cover;box-shadow:0 0 0 2px #FFFFFF"></div>
+          <div style="padding:18px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-weight:700;font-size:18px;line-height:1.25">{{ u.name }}</span>
+            <span style="font-size:15px;color:#44506B">{{ u.meta }}</span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px"><span style="padding:4px 8px;border-radius:7px;background:#E6ECF8;color:#1D3F86;font-weight:700;font-size:13px">{{ u.b1 }}</span><span style="padding:4px 8px;border-radius:7px;background:#FFF4CC;color:#7A5200;font-weight:700;font-size:13px">{{ u.b2 }}</span></div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:28px;padding:clamp(20px,2.5vw,32px);display:flex;flex-wrap:wrap;gap:24px 40px;border:1px solid #DDE3EE">
+      <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="margin:0;font-family:Outfit;font-weight:700;font-size:28px;line-height:1.15">Top programmes by domain</h3>
+        <p style="margin:0;color:#44506B;font-size:16px;line-height:1.5">Indicative first-year tuition, converted at today's rate.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;padding-top:8px">
+          <sc-for list="{{ domains }}" as="d" hint-placeholder-count="5"><button onClick="{{ d.pick }}" aria-pressed="{{ d.on }}" style="height:48px;display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:14px;border:0;background:{{ d.bg }};color:{{ d.color }};font:700 16px Figtree;cursor:pointer;text-align:left;transition:background .15s"><span class="material-symbols-rounded" style="font-size:20px">{{ d.icon }}</span>{{ d.label }}</button></sc-for>
+        </div>
+      </div>
+      <div style="flex:999 1 480px;min-width:0;display:flex;flex-direction:column">
+        <sc-for list="{{ programmes }}" as="p" hint-placeholder-count="4">
+          <a href="#" style="display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;min-height:76px;padding:12px 0;border-bottom:1px solid #E6E2D8;text-decoration:none;color:#10183A" style-hover="background:#FFFFFF">
+            <span style="flex:1 1 220px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px">{{ p.name }}</span><span style="font-size:14px;color:#44506B">{{ p.uni }}</span></span>
+            <span style="flex:0 0 120px;display:flex;align-items:center;gap:8px;font-size:15px;color:#44506B"><img data-img="{{ p.flag }}" alt="" style="width:22px;height:15px;border-radius:2px">{{ p.country }}</span>
+            <span style="flex:0 0 96px;font-size:15px;color:#44506B">{{ p.dur }}</span>
+            <span style="flex:0 0 88px;font-weight:700;font-size:16px">{{ p.fee }}</span>
+            <span class="material-symbols-rounded" style="color:#2A55A3">chevron_right</span>
+          </a>
+        </sc-for>
+        <a href="#" style="padding-top:18px;font-weight:700;display:flex;align-items:center;gap:4px">Explore all {{ domainName }} programmes<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;padding-top:16px">
+      <div style="display:flex;align-items:center;gap:16px"><span style="font-weight:700;font-size:18px">Our partner universities</span><span style="flex:1;height:1px;background:#CDE8D8"></span><span style="font-size:14px;color:#44506B">Logos to be supplied by partnerships team</span></div>
+      <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
+        <div style="display:flex;gap:16px;width:max-content">
+          <sc-for list="{{ partners }}" as="p" hint-placeholder-count="8"><div style="width:180px;height:84px;flex:none;border-radius:16px;background:#FFFFFF;border:1px solid #DDE3EE;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;font:500 12px ui-monospace,monospace;color:#44506B;line-height:1.4">logo: {{ p }}</div></sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Why Kanan" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,5vw,72px);align-items:center">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Why choose Kanan</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">Advice your parents can check, and you can trust</h2></div>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <sc-for list="{{ whys }}" as="w" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px">
+          <span style="width:52px;height:52px;border-radius:16px;background:#E2F4EA;color:#086B3C;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">{{ w.icon }}</span></span>
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-weight:700;font-size:19px">{{ w.t }}</span><span style="font-size:16px;line-height:1.55;color:#44506B">{{ w.d }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <a href="#" style="align-self:flex-start;height:52px;padding:0 22px;border-radius:14px;border:1.5px solid #2A55A3;color:#2A55A3;font-weight:700;display:flex;align-items:center;gap:8px;text-decoration:none" style-hover="background:#F3F6FC">Meet our counsellors<span class="material-symbols-rounded" style="font-size:20px">arrow_forward</span></a>
+  </div>
+  <div style="position:relative;height:clamp(340px,44vw,600px)">
+    <img src="assets/kanan-branch-counselling.webp" loading="lazy" decoding="async" alt="Kanan counsellor advising a student and parent at a Kanan branch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 50%;border-radius:32px;display:block">
+    <div style="position:absolute;right:24px;bottom:24px;background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 16px 36px rgba(14,35,80,.16)"><span class="material-symbols-rounded" style="color:#DC9617;font-size:30px">workspace_premium</span><span style="display:flex;flex-direction:column"><b style="font-size:16px">British Council-trained counsellors</b><span style="font-size:14px;color:#44506B">Certificates on file</span></span></div>
+  </div>
+</section>
+
+<section data-screen-label="Success stories" style="background:#0E2350;color:#FFFFFF;padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#7FE0A8">Success stories</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05;color:#FFFFFF">Students who've made the move</h2></div>
+      <a href="#" style="color:#FFFFFF;font-weight:700;display:flex;align-items:center;gap:4px">All student stories<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px">
+      <div style="background:#16306A;border-radius:28px;overflow:hidden;display:flex;flex-direction:column">
+        <button aria-label="Play video: Harsh's story" style="height:clamp(220px,28vw,380px);border:0;background:repeating-linear-gradient(135deg,#1D3F86 0 8px,#22478F 8px 16px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;color:#FFFFFF;font:500 13px ui-monospace,monospace"><span style="width:80px;height:80px;border-radius:40px;background:#FFCF25;color:#0E2350;display:flex;align-items:center;justify-content:center;transition:transform .2s" style-hover="transform:scale(1.06)"><span class="material-symbols-rounded" style="font-size:44px;font-variation-settings:'FILL' 1">play_arrow</span></span>video thumbnail: Harsh on campus · 2:14 · loads on tap</button>
+        <div style="padding:28px;display:flex;flex-direction:column;gap:10px">
+          <h3 style="margin:0;font-family:Outfit;font-weight:700;font-size:28px;line-height:1.2;color:#FFFFFF">“I had a 6.5 in IELTS and a 72% in B.Tech. Kanan found me three offers I didn't know were possible.”</h3>
+          <div style="font-size:16px;color:#CFDAF2">Harsh Desai · MS Computer Science, University of Texas at Dallas · Fall 2025</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <sc-for list="{{ stories }}" as="st" hint-placeholder-count="3">
+          <div style="background:#16306A;border-radius:24px;padding:24px;display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px">
+            <div style="width:64px;height:64px;border-radius:32px;background:repeating-linear-gradient(135deg,#1D3F86 0 4px,#22478F 4px 8px);display:flex;align-items:center;justify-content:center;font:500 10px ui-monospace,monospace;color:#CFDAF2">photo</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <h3 style="margin:0;font-family:Outfit;font-weight:700;font-size:20px;line-height:1.3;color:#FFFFFF">“{{ st.q }}”</h3>
+              <div style="font-size:15px;color:#CFDAF2">{{ st.who }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Awards" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0 56px;display:flex;flex-direction:column;gap:32px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:760px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Recognition &amp; awards</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">Recognised by the people who certify agents</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:20px">
+    <sc-for list="{{ awards }}" as="a" hint-placeholder-count="4">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:180px;background:repeating-linear-gradient(135deg,#F2E6C2 0 6px,#FFF4CC 6px 12px);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;font:500 12px ui-monospace,monospace;color:#7A5200;line-height:1.5">{{ a.img }}</div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-weight:700;font-size:18px;line-height:1.3">{{ a.t }}</span><span style="font-size:15px;color:#44506B">{{ a.by }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+<section data-screen-label="Events and guides" style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;padding:56px 0 clamp(64px,8vw,clamp(64px,8vw,112px));display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px 40px">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Upcoming events</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);letter-spacing:-0.02em;line-height:1.05">Meet universities, live</h2></div><a href="#" style="font-weight:700;display:flex;align-items:center;gap:4px">All events<span class="material-symbols-rounded" style="font-size:18px">arrow_forward</span></a></div>
+    <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EE;border-radius:22px;padding:18px;display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:18px;align-items:center">
+        <div style="height:76px;border-radius:16px;background:#E6ECF8;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#1D3F86"><span style="font:800 28px Outfit;line-height:1">{{ e.d }}</span><span style="font-weight:700;font-size:13px;text-transform:uppercase">{{ e.m }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="align-self:flex-start;padding:3px 8px;border-radius:6px;background:{{ e.tagBg }};color:{{ e.tagC }};font-weight:700;font-size:12px">{{ e.type }}</span><span style="font-weight:700;font-size:18px">{{ e.t }}</span><span style="font-size:15px;color:#44506B">{{ e.where }}</span></div>
+        <a href="#" style="height:44px;padding:0 16px;border-radius:12px;border:1.5px solid #2A55A3;color:#2A55A3;font-weight:700;display:flex;align-items:center;text-decoration:none" style-hover="background:#F3F6FC">Register free</a>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Free student guides</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);letter-spacing:-0.02em;line-height:1.05">Read it at your own pace</h2></div>
+    <sc-for list="{{ guides }}" as="g" hint-placeholder-count="4">
+      <a href="#" style="display:grid;grid-template-columns:56px minmax(0,1fr) 44px;gap:16px;align-items:center;padding:16px;border-radius:20px;background:#FFFFFF;border:1px solid #DDE3EE;text-decoration:none;color:#10183A" style-hover="border-color:#2A55A3">
+        <span style="width:56px;height:68px;border-radius:8px;background:{{ g.c }};display:flex;align-items:flex-end;padding:6px;box-sizing:border-box;font:700 10px Figtree;color:#FFFFFF">PDF</span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px">{{ g.t }}</span><span style="font-size:14px;color:#44506B">{{ g.m }}</span></span>
+        <span style="width:44px;height:44px;border-radius:22px;background:#E2F4EA;color:#086B3C;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">download</span></span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="FAQs" style="background:#FFFFFF;padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0;border-top:1px solid #DDE3EE">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;flex-wrap:wrap;gap:40px 64px">
+    <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:16px">
+      <span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">FAQs</span>
+      <h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:700;font-size:clamp(30px,3.5vw,48px);letter-spacing:-0.02em;line-height:1.05">Questions families ask us most</h2>
+      <p style="margin:0;color:#44506B;font-size:17px;line-height:1.55">Can't find yours? Ask a counsellor on WhatsApp. We usually reply within 15 minutes in office hours.</p>
+      <div role="tablist" aria-orientation="vertical" style="display:flex;flex-direction:column;gap:6px;padding-top:8px">
+        <sc-for list="{{ faqTabs }}" as="t" hint-placeholder-count="5"><button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-radius:14px;border:0;background:{{ t.bg }};color:{{ t.color }};font:700 17px Figtree;cursor:pointer;text-align:left">{{ t.label }}<span style="font-size:14px;font-weight:600">{{ t.n }}</span></button></sc-for>
+      </div>
+    </div>
+    <div style="flex:999 1 460px;min-width:0;display:flex;flex-direction:column">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+        <div style="border-bottom:1px solid #DDE3EE">
+          <button onClick="{{ f.toggle }}" aria-expanded="{{ f.open }}" style="width:100%;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:0;background:transparent;font:700 19px Figtree;color:#10183A;cursor:pointer;text-align:left;padding:12px 0">{{ f.q }}<span style="width:40px;height:40px;flex:none;border-radius:20px;background:{{ f.iconBg }};color:{{ f.iconC }};display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">{{ f.icon }}</span></span></button>
+          <sc-if value="{{ f.open }}"><div style="padding:0 60px 24px 0;font-size:17px;line-height:1.6;color:#44506B;animation:kup .2s ease-out">{{ f.a }}</div></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Consultation" style="padding:clamp(64px,8vw,clamp(64px,8vw,112px)) 0;background:#F3F6FC">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;flex-wrap:wrap;gap:40px 56px;align-items:flex-start">
+    <div style="flex:999 1 440px;min-width:0;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:12px"><span style="font:700 13px Figtree;letter-spacing:.08em;text-transform:uppercase;color:#086B3C">Free consultation</span><h2 style="margin:0;font-family:Outfit,sans-serif;font-weight:600;font-size:clamp(34px,4.2vw,56px);letter-spacing:-0.02em;line-height:1.05">Bring your marks. Leave with a plan.</h2><p style="margin:0;font-size:19px;line-height:1.55;color:#44506B;max-width:600px">A 30-minute call or branch visit with a named counsellor. You'll get a shortlist, a cost estimate and a timeline, in writing.</p></div>
+      <div style="display:flex;align-items:center;gap:18px;padding:20px 24px;background:#FFFFFF;border-radius:22px;border:1px solid #DDE3EE;align-self:flex-start">
+        <span style="font:800 48px Outfit;line-height:1">2.4L+</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px">successful students</span><span style="font-size:15px;color:#44506B">25+ years · 600+ partner institutions</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border-radius:20px;padding:20px;border:1px solid #DDE3EE;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="color:#DC9617;letter-spacing:1px">★★★★★</span><span style="font-size:13px;color:#44506B">Google · {{ r.when }}</span></div>
+            <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.4">“{{ r.q }}”</h3>
+            <span style="font-size:14px;color:#44506B">{{ r.who }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="flex:1 1 400px;max-width:520px;min-width:0;border-radius:28px;overflow:hidden;box-shadow:0 24px 56px rgba(14,35,80,.14);border:1px solid #DDE3EE">
+      <dc-import name="LeadForm" variant="inline" heading="Book your free consultation" sub="Takes 30 seconds. A counsellor calls you within one working hour." hint-size="100%,600px"></dc-import>
+    </div>
+  </div>
+</section>
+</main>
+<footer style="background:#0A1A3D;color:#FFFFFF;padding:80px 0 0">
+  <div style="width:min(1280px, calc(100% - 2 * clamp(16px, 3vw, 48px)));margin:0 auto;display:flex;flex-direction:column;gap:56px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:40px">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <img src="assets/kanan-logo-white.svg" alt="Kanan.co" style="height:30px;width:auto;align-self:flex-start">
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#CFDAF2;max-width:340px">Kanan International Pvt. Ltd. Helping Indian students study abroad since 1996.</p>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:16px"><a href="tel:+917969000000" style="color:#FFFFFF;font-weight:700;text-decoration:none;min-height:36px;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px;color:#7FE0A8">call</span>+91 79 6900 0000</a><a href="mailto:info@kanan.co" style="color:#FFFFFF;font-weight:700;text-decoration:none;min-height:36px;display:flex;align-items:center;gap:8px"><span class="material-symbols-rounded" style="font-size:20px;color:#7FE0A8">mail</span>info@kanan.co</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding-top:6px"><span style="font-weight:700;font-size:17px">Download the Kanan study abroad app</span><div style="display:flex;gap:10px"><a href="#" style="height:48px;padding:0 16px;border-radius:12px;border:1.5px solid #CFDAF2;color:#FFFFFF;text-decoration:none;display:flex;align-items:center;gap:8px;font-weight:600"><span class="material-symbols-rounded">android</span>Google Play</a><a href="#" style="height:48px;padding:0 16px;border-radius:12px;border:1.5px solid #CFDAF2;color:#FFFFFF;text-decoration:none;display:flex;align-items:center;gap:8px;font-weight:600"><span class="material-symbols-rounded">phone_iphone</span>App Store</a></div></div>
+      </div>
+      <sc-for list="{{ footCols }}" as="c" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:17px;color:#FFCF25;padding-bottom:10px">{{ c.t }}</span><sc-for list="{{ c.links }}" as="l"><a href="#" style="min-height:40px;display:flex;align-items:center;color:#FFFFFF;text-decoration:none;font-size:16px" style-hover="text-decoration:underline;color:#7FE0A8">{{ l }}</a></sc-for></div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;border-top:1px solid #23396B;padding-top:40px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-weight:700;font-size:17px;color:#FFCF25;padding-bottom:6px">Articles by category</span>
+        <sc-for list="{{ articleCats }}" as="a" hint-placeholder-count="5">
+          <div style="border-bottom:1px solid #23396B">
+            <button onClick="{{ a.toggle }}" aria-expanded="{{ a.open }}" style="width:100%;min-height:52px;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;color:#FFFFFF;font:600 16px Figtree;cursor:pointer;text-align:left">{{ a.t }}<span class="material-symbols-rounded">{{ a.icon }}</span></button>
+            <sc-if value="{{ a.open }}"><div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16px"><sc-for list="{{ a.links }}" as="l"><a href="#" style="min-height:40px;display:flex;align-items:center;padding:0 14px;border-radius:20px;background:#16306A;color:#FFFFFF;text-decoration:none;font-size:15px" style-hover="background:#1D3F86">{{ l }}</a></sc-for></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:700;font-size:17px;color:#FFCF25">Universities A–Z</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ az }}" as="l" hint-placeholder-count="26"><a href="#" style="width:40px;height:40px;border-radius:10px;background:#16306A;color:#FFFFFF;text-decoration:none;display:flex;align-items:center;justify-content:center;font-weight:700" style-hover="background:#2A55A3">{{ l }}</a></sc-for></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:700;font-size:17px;color:#FFCF25">Our branches</span>
+          <div style="display:flex;flex-wrap:wrap;gap:4px 18px"><sc-for list="{{ branchLinks }}" as="b" hint-placeholder-count="12"><a href="#" style="min-height:36px;display:flex;align-items:center;color:#FFFFFF;font-size:15px" style-hover="color:#7FE0A8">{{ b }}</a></sc-for></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid #23396B;padding:24px 0 32px;flex-wrap:wrap">
+      <span style="font-size:15px;color:#CFDAF2">© 2026 Kanan International Pvt. Ltd. · <a href="#" style="color:#FFFFFF">Privacy</a> · <a href="#" style="color:#FFFFFF">Terms</a> · <a href="#" style="color:#FFFFFF">Sitemap</a></span>
+      <div style="display:flex;gap:8px"><sc-for list="{{ socials }}" as="so" hint-placeholder-count="5"><a href="#" aria-label="{{ so }}" style="height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #3A5287;color:#FFFFFF;text-decoration:none;display:flex;align-items:center;font-weight:600;font-size:14px" style-hover="border-color:#FFFFFF">{{ so }}</a></sc-for></div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ phoneBar }}" hint-placeholder-val="{{ false }}">
+  <div style="position:sticky;bottom:0;z-index:55;background:#FFFFFF;border-top:1px solid #DDE3EE;padding:10px 12px 14px;display:grid;grid-template-columns:52px 52px minmax(0,1fr);gap:8px;box-shadow:0 -8px 24px rgba(14,35,80,.08)">
+    <a href="tel:+917969000000" aria-label="Call Kanan" style="height:52px;border-radius:14px;border:1.5px solid #DDE3EE;color:#10183A;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-size:11px;font-weight:700"><span class="material-symbols-rounded" style="font-size:22px">call</span>Call</a>
+    <a href="#" aria-label="WhatsApp Kanan" style="height:52px;border-radius:14px;background:#0C9253;color:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-size:11px;font-weight:700;animation:kpulse 2.4s ease-out infinite"><img src="assets/whatsapp.svg" alt="" style="width:22px;height:22px;flex:none">Chat</a>
+    <button onClick="{{ openModal }}" style="height:52px;border:0;border-radius:14px;background:#0A7F47;color:#FFFFFF;font:700 17px Figtree;cursor:pointer">Book free consultation</button>
+  </div>
+</sc-if>
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:16px;bottom:{{ toastBottom }};z-index:60;width:min(360px, calc(100% - 32px));box-sizing:border-box;background:#FFFFFF;border-radius:18px;box-shadow:0 18px 40px rgba(14,35,80,.22);border:1px solid #DDE3EE;padding:14px 14px 14px 16px;display:flex;gap:12px;align-items:center;animation:kup .3s ease-out">
+    <span style="width:44px;height:44px;flex:none;border-radius:22px;background:#E2F4EA;color:#086B3C;display:flex;align-items:center;justify-content:center"><span class="material-symbols-rounded">groups</span></span>
+    <span style="flex:1;font-size:15px;line-height:1.4"><b>2.4L+ students</b> have studied abroad with Kanan</span>
+    <button onClick="{{ closeToast }}" aria-label="Dismiss" style="width:44px;height:44px;flex:none;border-radius:22px;border:0;background:transparent;color:#44506B;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#F3F6FC"><span class="material-symbols-rounded">close</span></button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ modalOn }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:70;background:rgba(10,26,61,.6);display:flex;align-items:center;justify-content:center;padding:24px" onClick="{{ closeModal }}">
+    <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Book free consultation" style="width:min(480px,100%);max-height:calc(100vh - 48px);overflow:auto;border-radius:28px;box-shadow:0 30px 70px rgba(10,26,61,.4);animation:kup .25s ease-out">
+      <dc-import name="LeadForm" variant="modal" hint-size="480px,600px"></dc-import>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;openPanel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;study&quot;,&quot;exams&quot;,&quot;res&quot;,&quot;branch&quot;,&quot;search&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showModal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showToast&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state={open:this.props.openPanel||null,mega:0,q:'',uniTab:0,domain:0,faqTab:0,faqOpen:0,footOpen:-1,modal:!!this.props.showModal,toast:!!this.props.showToast,slide:0};
+  componentDidMount(){const _syncImg=()=>{document.querySelectorAll('img[data-img]').forEach(el=>{const v=el.getAttribute('data-img');if(v&&!v.includes('{{')&&el.getAttribute('src')!==v)el.setAttribute('src',v);});};_syncImg();this._imgObs=new MutationObserver(_syncImg);this._imgObs.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['data-img']});const el=this.rootRef.current;if(el&&window.ResizeObserver){const u=()=>{const w=el.offsetWidth;if(w&&w!==this.state.w)this.setState({w});};u();this.ro=new ResizeObserver(u);this.ro.observe(el);}
+    if(this.props.showToast==null){try{if(!sessionStorage.getItem('kanan_toast')){this.t=setTimeout(()=>{this.setState({toast:true});sessionStorage.setItem('kanan_toast','1');},6000);}}catch(e){}}
+  }
+  sliderRef=React.createRef();rootRef=React.createRef();
+  respVals(s,set,fl){
+    const w=s.w||1440,wide=w>=1360,compact=w<1024,phone=w<560,ds=s.drawerSec??-1;
+    const secs=[['Study Abroad',(this._mcData||[]).map((c,i)=>({l:c[0],flag:fl(c[1]),href:'#',go:e=>{e.preventDefault();set({drill:i});}}))],['Exams',['IELTS','PTE','GRE','GMAT','TOEFL','Duolingo'].map(l=>({l,flag:'',href:'#'}))],['Resources',['Articles','Scholarships','Guides & e-books','Events & webinars'].map(l=>({l,flag:'',href:'#'}))]];
+    return {rootRef:this.rootRef,showNav:!compact,isCompact:compact,isWide:wide,notWide:!wide,showWaIcon:!wide&&!phone,showCta:!phone,
+      ctaLabel:(wide||compact)?'Book free consultation':'Free consultation',showTagline:w>=900,notPhone:!phone,isPhone:phone,
+      studyOpen:!compact&&s.open==='study',examsOpen:!compact&&s.open==='exams',resOpen:!compact&&s.open==='res',
+      drawerOn:compact&&s.open==='drawer',drawerIcon:compact&&s.open==='drawer'?'close':'menu',toggleDrawer:()=>set({open:s.open==='drawer'?null:'drawer',drill:-1}),
+      drawerSections:secs.map(([t,items],i)=>({t,items,open:ds===i,icon:ds===i?'remove':'add',toggle:()=>set({drawerSec:ds===i?-1:i})})),
+      toastBottom:phone?'96px':'24px',phoneBar:phone&&s.open!=='drawer',...(()=>{const md=this._mcData||[],dr=s.drill??-1,dm=md[dr];return {hasDrill:!!dm,noDrill:!dm,drillBack:()=>set({drill:-1}),drill:dm?{name:dm[0],flag:fl(dm[1]),href:/canada/i.test(dm[0])?'Study in Canada.dc.html':'#',cols:[{t:'Popular courses',links:dm[2]},{t:'Top universities',links:dm[3]},{t:'Top reads',links:dm[4]}]}:{name:'',flag:'',href:'#',cols:[]}};})()};
+  }
+  sectionVals(s,set,fl){
+    const sc=d=>{const el=this.sliderRef.current;if(el)el.scrollBy({left:d*536,behavior:'smooth'});};
+    return {
+      heroTrending:['MS in Canada','UK 1-year MBA','Nursing in Australia','IELTS 6.0 universities'],
+      stats:[['25+','years\' experience'],['2.4L+','successful students'],['600+','partner institutions'],['240+','expert trainers']].map(([v,l])=>({v,l})),
+      sliderRef:this.sliderRef,slidePrev:()=>sc(-1),slideNext:()=>sc(1),
+      destinations:[['United Kingdom','UK','gb','1-year master\'s','160+ partner universities'],['Canada','Canada','ca','3-year post-study work','140+ partner institutions'],['USA','USA','us','STEM OPT up to 3 years','120+ partner universities'],['Australia','Australia','au','Up to 4 years work rights','60+ partner universities'],['Ireland','Ireland','ie','Europe\'s tech hub','25+ partner universities'],['Germany','Germany','de','Low or no tuition','40+ partner universities'],['New Zealand','New Zealand','nz','3-year post-study work','20+ partner universities'],['France','France','fr','Top-ranked business schools','30+ partner schools'],['Dubai (UAE)','Dubai','ae','UK degrees closer to home','15+ partner campuses'],['Singapore','Singapore','sg','Asia\'s business hub','15+ partner institutions'],['Netherlands','the Netherlands','nl','English-taught programmes','20+ partner universities'],['Italy','Italy','it','Regional scholarships','15+ partner universities']].map(([name,short,c,tag,unis])=>({name,short,href:/canada/i.test(name)?'Study in Canada.dc.html':'#',flag:fl(c),tag,unis:'Universities, costs & visa guide'})),
+      services:[['edit_note','Test preparation','IELTS, PTE, TOEFL, Duolingo, GRE and GMAT coaching, in branch or online, with free mock tests.','Explore test prep'],['school','University & course selection','A shortlist matched to your marks, budget and career goals. Not to our commissions.','Get my shortlist'],['description','Applications & admissions','SOPs, LORs, documents and deadlines, reviewed by people who read hundreds a year.','See how it works'],['workspace_premium','Scholarships','We find the scholarships you actually qualify for and help you write a strong case.','Find scholarships'],['verified_user','Visa guidance','Document checks, financial proofs and mock interviews for a confident visa file.','Visa support'],['home_work','Loans & accommodation','Education loans from partner banks and NBFCs, plus safe student housing near campus.','Plan my finances']].map(([icon,t,d,cta])=>({icon,t,d,cta})),
+      ...(this.sectionVals2?this.sectionVals2(s,set,fl):{})
+    };
+  }
+  sectionVals2(s,set,fl){
+    const inst=[['University of Leeds','gb','Leeds, UK · QS #82','Sep · Jan intake','From ₹24 L/yr','photo: Leeds campus'],['University of Waterloo','ca','Ontario, Canada · Co-op','Sep · Jan intake','From ₹28 L/yr','photo: Waterloo campus'],['Monash University','au','Melbourne · Group of Eight','Feb · Jul intake','From ₹30 L/yr','photo: Monash campus'],['Arizona State University','us','Tempe, USA · #1 innovation','Aug · Jan intake','From ₹27 L/yr','photo: ASU campus']];
+    const crs=[['MS in Data Science','ca','120+ universities · 1–2 yrs','STEM','From ₹18 L/yr','photo: data lab'],['MSc International Business','gb','90+ universities · 1 yr','1-year','From ₹20 L/yr','photo: business school'],['Master of Nursing','au','40+ universities · 2 yrs','PR pathway','From ₹25 L/yr','photo: nursing lab'],['MS Computer Science','us','150+ universities · 2 yrs','STEM OPT','From ₹26 L/yr','photo: CS lab']];
+    const cards=(s.uniTab===0?inst:crs).map(([name,c,meta,b1,b2,img])=>({name,photo:({'University of Leeds':'assets/leeds-campus.webp','University of Waterloo':'assets/waterloo-campus.webp','Monash University':'assets/monash-campus.webp','Arizona State University':'assets/asu-campus.webp','MS in Data Science':'assets/data-science-lab.webp','MSc International Business':'assets/intl-business.webp','Master of Nursing':'assets/nursing-lab.webp','MS Computer Science':'assets/computer-science-lab.webp'})[name]||'',flag:fl(c),meta,b1,b2:b2+'',img}));
+    const dom=[['MBA','business_center'],['Data Science','analytics'],['AI','neurology'],['Engineering','engineering'],['Healthcare','medical_services']];
+    const progs={
+      0:[['Global MBA','University of Birmingham','gb','UK','12 months','₹28 L'],['MBA (STEM)','Northeastern University','us','USA','18 months','₹45 L'],['MBA','Trinity College Dublin','ie','Ireland','12 months','₹34 L'],['Master of Business Administration','Deakin University','au','Australia','2 years','₹26 L']],
+      1:[['MSc Data Science','University of Manchester','gb','UK','12 months','₹31 L'],['MDS Data Science','University of British Columbia','ca','Canada','10 months','₹30 L'],['MS Data Science','University of Illinois Chicago','us','USA','2 years','₹29 L'],['MSc Data Analytics','University College Dublin','ie','Ireland','12 months','₹26 L']],
+      2:[['MSc Artificial Intelligence','University of Edinburgh','gb','UK','12 months','₹38 L'],['MS Artificial Intelligence','Northeastern University','us','USA','2 years','₹42 L'],['Master of AI','Monash University','au','Australia','2 years','₹31 L'],['MSc AI','TU Munich','de','Germany','2 years','₹1 L']],
+      3:[['MEng Electrical & Computer','University of Waterloo','ca','Canada','16 months','₹27 L'],['MSc Mechanical Engineering','RWTH Aachen','de','Germany','2 years','₹1 L'],['MS Civil Engineering','Arizona State University','us','USA','2 years','₹27 L'],['Master of Engineering','RMIT University','au','Australia','2 years','₹28 L']],
+      4:[['Master of Nursing','University of Sydney','au','Australia','2 years','₹30 L'],['MSc Public Health','University of Leeds','gb','UK','12 months','₹22 L'],['Master of Public Health','Boston University','us','USA','2 years','₹48 L'],['MSc Pharmaceutical Sciences','University of Galway','ie','Ireland','12 months','₹21 L']]
+    };
+    return {
+      uniTabs:['Trending institutions','Trending courses'].map((label,i)=>({label,on:s.uniTab===i,bg:s.uniTab===i?'#0E2350':'transparent',color:s.uniTab===i?'#FFFFFF':'#10183A',pick:()=>set({uniTab:i})})),
+      uniCards:cards,
+      domains:dom.map(([label,icon],i)=>({label,icon,on:s.domain===i,bg:s.domain===i?'#E6ECF8':'transparent',color:s.domain===i?'#1D3F86':'#10183A',pick:()=>set({domain:i})})),
+      domainName:dom[s.domain][0],
+      programmes:progs[s.domain].map(([name,uni,c,country,dur,fee])=>({name,uni,flag:fl(c),country,dur,fee:fee+'/yr'})),
+      partners:['University of Leeds','Coventry University','University of Waterloo','Monash University','Deakin University','Arizona State University','University College Dublin','Conestoga College','University of Birmingham','RMIT University'],
+      whys:[['groups','Named counsellors, not call centres','You get one counsellor from first call to visa. You know their name, number and track record.'],['receipt_long','Transparent about fees','Our counselling is free. Any paid service, like test prep, is quoted in writing before you start.'],['location_on','25+ years, branches across India','Walk into a branch with your parents and meet the team in person.'],['fact_check','Shortlists based on your profile','We recommend universities you can realistically get into, with honest odds.']].map(([icon,t,d])=>({icon,t,d})),
+      stories:[['My parents were worried about the loan. Kanan sat with them and walked through every number.','Sneha Iyer · Master of Nursing, Deakin University'],['I got a £5,000 scholarship I didn\'t even know I could apply for.','Karan Mehta · MSc Finance, University of Leeds'],['My visa was approved in 11 days. The mock interview made all the difference.','Aditi Rao · MEng, University of Windsor']].map(([q,who])=>({q,who})),
+      awards:[['ICEF IAS accredited agency','ICEF · since 20XX','image: ICEF IAS certificate'],['British Council certified counsellors','British Council Agent Quality Framework','image: BC certificate photo'],['PIER Qualified Education Agent Counsellors','PIER, Australia','image: QEAC badge'],['Top partner award','Partner university name & year','image: award ceremony photo']].map(([t,by,img])=>({t,by,img})),
+      ...(this.sectionVals3?this.sectionVals3(s,set,fl):{})
+    };
+  }
+  sectionVals3(s,set,fl){
+    const F={
+      Application:[['When should I start applying for the September 2027 intake?','Start 10–12 months ahead, around October 2026. That leaves time for tests, documents and early scholarship deadlines. UK and Ireland accept applications until summer, but popular courses fill early.'],['Do I need IELTS, or can I apply without it?','Many universities accept PTE, TOEFL or Duolingo, and some waive English tests based on your Class 12 English marks. Your counsellor will check each university on your shortlist.'],['How many universities should I apply to?','Usually 5–8: two ambitious, three realistic, two safe. We help you balance them so you are not paying unnecessary application fees.'],['Is Kanan\'s counselling really free?','Yes. Counselling, shortlisting and application support are free for students. Test prep is a paid service, quoted in writing before you join.'],['Can I apply with a study gap?','Yes. Gaps are common. We help you explain yours clearly in your SOP with work, courses or other evidence.']],
+      Admission:[['What percentage do I need for a master\'s in the UK?','Most UK universities ask for 55–60% in your bachelor\'s; top universities may ask for 65–70%. Requirements vary by course.'],['Are 3-year Indian degrees accepted abroad?','The UK, Australia and many European countries accept them. Some US and Canadian universities prefer 16 years of education; we\'ll match you accordingly.'],['How long do offers take?','UK offers take 2–6 weeks, Canada 4–10 weeks, USA 4–12 weeks depending on the round.']],
+      Visa:[['How does Kanan help my visa chances?','We check every document, financial proof and SOP before you file, and run mock interviews where the visa needs one.'],['How much bank balance do I need to show?','It depends on the country and city. For the UK it is tuition plus about ₹12–13 lakh for living costs. We prepare a funds checklist for you.'],['Do you help with visa interviews?','Yes. US F-1 and other interview-based visas get mock interviews with feedback.']],
+      Scholarship:[['Can Indian students get full scholarships?','Fully funded awards like Chevening or DAAD are competitive. Partial university scholarships of 10–50% are far more common, and we help you apply.'],['When do scholarship deadlines close?','Many close 6–9 months before the course starts. Applying early improves your chances.']],
+      Accommodation:[['Do you help find student housing?','Yes. We work with verified housing partners near campus and can help you compare costs before you fly.'],['University halls or private housing?','Halls are simpler for first-year students. Private housing can be cheaper for later years. We\'ll walk you through both.']]
+    };
+    const cats=Object.keys(F),cur=F[cats[s.faqTab]];
+    return {
+      events:[['14','Oct','UK University Fair','Ahmedabad · Hyatt Regency · 11am–5pm','In person','#FFF4CC','#7A5200'],['21','Oct','Canada: SDS changes explained','Live webinar · 7pm IST','Webinar','#E6ECF8','#1D3F86'],['02','Nov','Meet Monash University','Vadodara branch · 3pm','On-campus rep','#E2F4EA','#086B3C']].map(([d,m,t,where,type,tagBg,tagC])=>({d,m,t,where,type,tagBg,tagC})),
+      guides:[['Study abroad cost guide 2027','24 pages · Country-by-country fees in ₹','#2A55A3'],['UK vs Canada vs Australia','16 pages · Work rights, PR, costs','#0A7F47'],['Scholarships for Indian students','30 pages · 120+ awards listed','#DC9617'],['Visa document checklist','12 pages · Printable','#0E2350']].map(([t,m,c])=>({t,m,c})),
+      faqTabs:cats.map((label,i)=>({label,n:F[label].length,on:s.faqTab===i,bg:s.faqTab===i?'#0E2350':'#F3F6FC',color:s.faqTab===i?'#FFFFFF':'#10183A',pick:()=>set({faqTab:i,faqOpen:0})})),
+      faqs:cur.map(([q,a],i)=>({q,a,open:s.faqOpen===i,icon:s.faqOpen===i?'remove':'add',iconBg:s.faqOpen===i?'#0E2350':'#F3F6FC',iconC:s.faqOpen===i?'#FFFFFF':'#10183A',toggle:()=>set({faqOpen:s.faqOpen===i?-1:i})})),
+      reviews:[['They told me honestly that my first-choice university was a stretch, and they were right.','Rahul S. · Ahmedabad','2 weeks ago'],['My counsellor answered my father\'s questions patiently, three meetings in a row.','Nidhi P. · Surat','1 month ago'],['Clear about which services were free. No pressure to sign up for anything.','Yash M. · Vadodara','1 month ago'],['IELTS coaching took me from 6.0 to 7.5 in six weeks.','Pooja K. · Rajkot','2 months ago']].map(([q,who,when])=>({q,who,when})),
+      ...(this.sectionVals4?this.sectionVals4(s,set,fl):{})
+    };
+  }
+  sectionVals4(s,set){
+    const cats=[['Study abroad basics',['Step-by-step guide','Cost calculator','Best countries for Indians','Study abroad after 12th']],['Exams',['IELTS band scores','PTE vs IELTS','GRE prep plan','Duolingo accepted universities']],['Scholarships & loans',['Scholarships for Indian students','Education loan without collateral','Chevening guide']],['Visas',['UK student visa','Canada study permit','US F-1 interview','Australia GS requirement']],['Life abroad',['Part-time jobs','Accommodation tips','Packing checklist']]];
+    return {
+      footCols:[{t:'Study abroad',links:['Study in UK','Study in Canada','Study in USA','Study in Australia','Study in Ireland','Study in Germany','Study in New Zealand']},{t:'Test prep',links:['IELTS coaching','PTE coaching','TOEFL coaching','Duolingo prep','GRE coaching','GMAT coaching']},{t:'Company',links:['About Kanan','Our counsellors','Awards','Careers','Events','Contact us','FAQs']}],
+      articleCats:cats.map(([t,links],i)=>({t,links,open:s.footOpen===i,icon:s.footOpen===i?'remove':'add',toggle:()=>set({footOpen:s.footOpen===i?-1:i})})),
+      az:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+      branchLinks:['Ahmedabad','Vadodara','Surat','Rajkot','Anand','Mehsana','Bhavnagar','Mumbai','Pune','New Delhi','Jaipur','Indore','Chandigarh'],
+      socials:['Instagram','YouTube','LinkedIn','Facebook','X'],
+      toastOn:s.toast,closeToast:()=>set({toast:false}),
+      modalOn:s.modal,stop:e=>e.stopPropagation()
+    };
+  }
+  componentWillUnmount(){clearTimeout(this.t);this.ro&&this.ro.disconnect();}
+  componentDidUpdate(pp){if(pp.openPanel!==this.props.openPanel)this.setState({open:this.props.openPanel||null});if(pp.showModal!==this.props.showModal)this.setState({modal:!!this.props.showModal});if(pp.showToast!==this.props.showToast)this.setState({toast:!!this.props.showToast});}
+  renderVals(){
+    const s=this.state,set=o=>this.setState(o),fl=c=>`https://flagcdn.com/w80/${c}.png`;
+    const D=window.KANAN_DATA||{};
+    const mcData=[
+      ['United Kingdom','gb',['MSc Data Science','MBA (1 year)','MSc Management','LLM International Law','MSc Nursing'],['University of Leeds','University of Manchester','Coventry University','University of Birmingham','Queen Mary University of London'],['UK student visa checklist 2027','Cost of studying in the UK','Graduate Route explained']],
+      ['Canada','ca',['PG Diploma in Business','MEng Computer Engineering','Data Analytics (college)','Supply Chain Management','Early Childhood Education'],['University of Waterloo','University of Toronto','Conestoga College','Humber Polytechnic','University of Windsor'],['SDS vs non-SDS in 2027','Canada PGWP rules','Cost of living in Toronto']],
+      ['USA','us',['MS Computer Science','MS Business Analytics','MBA (STEM)','MS Mechanical Engineering','Master of Public Health'],['Arizona State University','Northeastern University','University of Illinois Chicago','Pace University','University of Texas at Dallas'],['F-1 visa interview tips','STEM OPT explained','GRE-waiver universities']],
+      ['Australia','au',['Master of IT','Master of Professional Accounting','Master of Nursing','Master of Engineering','MBA'],['Monash University','University of Melbourne','UNSW Sydney','Deakin University','RMIT University'],['Genuine Student requirement','Post-study work rights','Living costs in Melbourne']],
+      ['Ireland','ie',['MSc Data Analytics','MSc Computing','MSc Finance','MSc Pharma','MBA'],['Trinity College Dublin','University College Dublin','University of Galway','Dublin City University','University of Limerick'],['Stamp 1G explained','Cost of studying in Ireland','Jobs after an Irish master\'s']],
+      ['Germany','de',['MSc Computer Science','MSc Automotive Engineering','MBA','MSc Data Science','MSc Renewable Energy'],['TU Munich','RWTH Aachen','IU International University','SRH Berlin','Arden University Berlin'],['Blocked account in 2027','Public vs private universities','Learning German before you go']],
+      ['New Zealand','nz',['Master of IT','Master of Engineering','Master of Business','Master of Nursing Science','PG Diploma in Business'],['University of Auckland','University of Otago','Massey University','Victoria University of Wellington','AUT'],['NZ student visa guide','Post-study work in NZ','Cost of living in Auckland']],
+      ['France','fr',['MSc in Management','MSc Luxury Management','MBA','MSc Finance','MSc Hospitality'],['NEOMA Business School','SKEMA','ESSEC','Grenoble EM','IESEG'],['France APS & Campus France','Study in English in France','Talent passport explained']],
+      ['Dubai (UAE)','ae',['BBA','MBA','MSc Engineering Management','BSc Computer Science','MSc Finance'],['Heriot-Watt Dubai','Middlesex Dubai','Murdoch Dubai','University of Birmingham Dubai','Amity Dubai'],['UK degrees in Dubai','Dubai student visa','Cost of studying in Dubai']],
+      ['Singapore','sg',['MSc Business Analytics','MBA','Diploma in Hospitality','MSc Computing','BSc Business'],['NUS','NTU','SIM Global','James Cook Singapore','Kaplan Singapore'],['Singapore student pass','Private vs public universities','Jobs after studying in Singapore']]
+    ];
+    const m=mcData[s.mega];this._mcData=mcData;
+    const nav=[['Study Abroad','study'],['Exams','exams'],['Resources','res'],['Events',null],['About',null]];
+    return {
+      navItems:nav.map(([label,k])=>({label,hasMenu:!!k,on:s.open===k&&!!k,bg:s.open===k&&k?'#F3F6FC':'transparent',color:s.open===k&&k?'#1D3F86':'#10183A',enter:()=>k&&set({open:k}),click:()=>k&&set({open:s.open===k?null:k})})),
+      closeHover:()=>{if(['study','exams','res'].includes(s.open)&&!this.props.openPanel)set({open:null});},
+      closeAll:()=>set({open:null}),
+      studyOpen:s.open==='study',examsOpen:s.open==='exams',resOpen:s.open==='res',branchOpen:s.open==='branch',searchOpen:s.open==='search',
+      toggleBranch:()=>set({open:s.open==='branch'?null:'branch'}),openSearch:()=>set({open:'search'}),
+      openModal:()=>set({modal:true,open:null}),closeModal:()=>set({modal:false}),
+      megaCountries:mcData.map((c,i)=>({name:c[0],flag:fl(c[1]),bg:i===s.mega?'#F3F6FC':'transparent',arrow:i===s.mega?'#2A55A3':'transparent',pick:()=>set({mega:i})})),
+      mc:{name:m[0],href:/canada/i.test(m[0])?'Study in Canada.dc.html':'#',cols:[{title:'Popular courses',links:m[2]},{title:'Top universities',links:m[3]},{title:'Top reads',links:m[4]}]},
+      exams:[['IELTS','Accepted in UK, Canada, Australia'],['PTE','Fast results, computer-based'],['GRE','For MS and STEM master\'s'],['GMAT','For MBA and business master\'s'],['TOEFL','Preferred by many US universities'],['Duolingo','Online, at-home English test']].map(([name,desc])=>({name,desc,links:['Exam pattern','Preparation & tips','Scores explained','Free mock test','Book a class']})),
+      resources:[['article','Articles','Country guides, costs and visa explainers'],['payments','Scholarships','Searchable list by country and course'],['menu_book','Guides & e-books','Free downloads to plan step by step'],['event','Events & webinars','University fairs and live Q&As']].map(([icon,title,desc])=>({icon,title,desc})),
+      trendingReads:['UK vs Canada for a master\'s in 2027','How to fund your study abroad with an education loan','Best courses for PR in Australia','IELTS band needed for top UK universities'],
+      branches:[['Gujarat',['Ahmedabad – Navrangpura','Ahmedabad – Satellite','Vadodara','Surat','Rajkot','Anand']],['Maharashtra',['Mumbai – Andheri','Pune']],['Delhi NCR',['New Delhi','Gurugram']],['Rajasthan',['Jaipur']],['Madhya Pradesh',['Indore']],['Punjab',['Chandigarh']]].map(([state,cities])=>({state,cities})),
+      trending:['MS in Data Science Canada','MBA in UK under ₹30 lakh','Nursing in Australia','IELTS 6.5 universities','Ireland Sep 2027 intake','Scholarships for Indian students'],
+      suggestions:[['school','University of Leeds','University · UK · QS #82'],['menu_book','MSc Computer Science','Course · 120+ universities'],['flag','Study in Ireland','Country guide'],['payments','Commonwealth Scholarship','Scholarship · UK']].map(([icon,t,k])=>({icon,t,k})),
+      q:s.q,onQ:e=>set({q:e.target.value}),
+      ...(this.sectionVals?this.sectionVals(s,set,fl):{}),...this.respVals(s,set,fl)
+    };
+  }
+}
+</script>
+</body>
+</html>
